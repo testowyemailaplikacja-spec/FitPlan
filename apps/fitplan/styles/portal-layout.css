@@ -1,0 +1,85 @@
+/* Keep portal controls outside the scrolling app on phones. */
+@media (max-width:699px) {
+  body.fitplan-app-shell {
+    --fitplan-controls-row:2;
+    --fitplan-navigation-row:3;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-rows:minmax(0,1fr) auto auto;
+    gap:8px;
+    height:100%;
+    height:100dvh;
+  }
+  body.fitplan-app-shell > #appFrame {
+    grid-column:1 / -1;
+    grid-row:1;
+    min-width:0;
+    min-height:0;
+  }
+  body.fitplan-app-shell > :is(.portal-home-link,.portal-preferences,.offline-control,.portal-ai-root,.offline-toast) {
+    position:static;
+    inset:auto;
+    align-self:center;
+    transform:none;
+  }
+  body.fitplan-app-shell > .offline-control {
+    grid-column:1;
+    grid-row:var(--fitplan-controls-row);
+    justify-self:start;
+    margin-left:max(8px,env(safe-area-inset-left));
+    min-width:0;
+    max-width:260px;
+    width:calc(100% - max(8px,env(safe-area-inset-left)));
+    text-align:left;
+  }
+  body.fitplan-app-shell > .offline-control .offline-label {
+    min-width:0;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    line-height:1.25;
+  }
+  body.fitplan-app-shell > .portal-preferences {
+    grid-column:2;
+    grid-row:var(--fitplan-controls-row);
+    margin-right:max(8px,env(safe-area-inset-right));
+  }
+  body.fitplan-app-shell > .portal-home-link {
+    grid-column:1;
+    grid-row:var(--fitplan-navigation-row);
+    justify-self:start;
+    margin-left:max(8px,env(safe-area-inset-left));
+    margin-bottom:max(8px,env(safe-area-inset-bottom));
+  }
+  body.fitplan-app-shell > .portal-ai-root {
+    grid-column:2;
+    grid-row:var(--fitplan-navigation-row);
+    justify-self:end;
+    min-height:50px;
+    margin-right:max(8px,env(safe-area-inset-right));
+    margin-bottom:max(8px,env(safe-area-inset-bottom));
+  }
+  body.fitplan-app-shell .portal-ai-panel {
+    position:fixed;
+    inset:8px;
+    width:auto;
+    height:auto;
+  }
+  body.fitplan-app-shell .portal-ai-panel:not([hidden]) ~ .portal-ai-launch {
+    visibility:hidden;
+  }
+  body.fitplan-app-shell:has(> .offline-toast:not([hidden])) {
+    grid-template-rows:minmax(0,1fr) auto auto auto;
+    --fitplan-controls-row:3;
+    --fitplan-navigation-row:4;
+  }
+  body.fitplan-app-shell > .offline-toast {
+    grid-column:1 / -1;
+    grid-row:2;
+    width:auto;
+    margin:0 max(8px,env(safe-area-inset-right)) 0 max(8px,env(safe-area-inset-left));
+    pointer-events:none;
+  }
+  body.fitplan-app-shell:has(.portal-ai-panel:not([hidden])) > :is(.portal-home-link,.portal-preferences,.offline-control,.offline-toast) {
+    visibility:hidden;
+  }
+}

@@ -1,0 +1,414 @@
+/* Start: independent from the anatomy and the legacy FitPlan styles. */
+.fps-start{display:grid;gap:18px;min-width:0}
+.fps-intro h3,.fps-start h4{margin:0 0 6px;font-size:1.18rem}
+.fps-intro p,.fps-start p{margin:6px 0;line-height:1.55}
+.fps-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.fps-tabs button{cursor:pointer;min-height:54px;padding:11px;border:1px solid var(--line-2,#284838);border-radius:14px;background:var(--card-2,#0d1712);color:var(--text,#fff);font-weight:700;line-height:1.3}
+.fps-tabs button[aria-selected="true"]{background:var(--primary-2,#1ba854);color:#fff;border-color:var(--primary,#30c56c)}
+.fps-tabs button:focus-visible,.fps-start button:focus-visible,.fps-start input:focus-visible,.fps-start select:focus-visible{outline:3px solid var(--primary-3,#52e58a);outline-offset:2px}
+.fps-start [role="tabpanel"]{min-width:0;border:1px solid var(--line-2,#284838);border-radius:18px;background:var(--card,#111d17);padding:clamp(14px,3vw,22px)}
+.fps-start [hidden]{display:none!important}
+.fps-form,.fps-custom{display:grid;gap:16px}
+.fps-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:15px}
+.fps-start label{display:grid;gap:6px;font-weight:700;color:var(--text,#fff)}
+.fps-start label small{font-weight:400;color:var(--muted,#9fb4a8)}
+.fps-start input:not([type="radio"]),.fps-start select{width:100%;min-width:0;min-height:46px; padding:9px 12px;border:1px solid var(--line-3,#335c47);border-radius:10px;background:var(--panel,#0e1813);color:var(--text,#fff)}
+.fps-mode{display:flex;gap:12px 24px;flex-wrap:wrap;border:1px solid var(--line-2,#284838);border-radius:14px;padding:12px 16px}
+.fps-mode legend{padding:0 6px;font-weight:700}
+.fps-mode label{display:flex;align-items:center;gap:8px;font-size:.93rem}
+.fps-mode input{accent-color:var(--primary,#30c56c);width:18px;height:18px}
+.fps-custom-head,.fps-config-footer,.fps-custom-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.fps-custom-head h5{margin:0;font-size:1rem}
+.fps-custom-list{display:grid;gap:8px}
+.fps-custom-row{padding:12px;border:1px solid var(--line-2,#284838);border-radius:12px;background:var(--panel-2,#101d16)}
+.fps-custom-row>strong{min-width:70px}
+.fps-custom-row label{flex:1 1 110px}
+.fps-custom-row input{max-width:210px}
+.fps-feedback{min-height:1.4em;color:var(--primary-3,#52e58a)}
+.fps-hint{border-left:3px solid var(--primary,#30c56c);padding:8px 12px;background:var(--panel-2,#101d16);border-radius:8px}
+.fps-picker{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) auto;align-items:end;gap:10px;margin:16px 0}
+.fps-picker label{grid-row:1}
+.fps-picker input,.fps-picker select,.fps-picker button{grid-row:2}
+.fps-picker input{grid-column:1}.fps-picker select{grid-column:2}.fps-picker button{grid-column:3}
+.fps-workout-list{display:grid;gap:8px;list-style:none;padding:0;margin:14px 0}
+.fps-workout-list>li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid var(--line-2,#284838);border-radius:12px}
+.fps-workout-list .fps-item-copy{min-width:0;overflow-wrap:anywhere}
+.fps-workout-list small{display:block;color:var(--muted,#9fb4a8)}
+.fps-item-actions{display:flex;gap:6px;flex-shrink:0}
+.fps-item-actions button{padding:6px 10px}
+
+/* One-exercise substitution: readable on phones without widening workout rows. */
+.fps-workout-list>li:has(.fps-swap-inline){flex-wrap:wrap}
+.fps-swap-inline{display:flex;flex:1 1 100%;flex-wrap:wrap;align-items:end;gap:8px;padding:12px;border-radius:12px;background:var(--panel-soft,#15261d);border:1px solid var(--line-3,#335c47);min-width:0}
+.fps-swap-inline label{flex:1 1 220px;min-width:0;font-size:.92rem}
+.fps-swap-inline select{width:100%;min-height:44px}
+.fps-swap-inline button{min-height:44px;flex:1 1 110px}
+.fps-item-actions{flex-wrap:wrap;justify-content:flex-end}
+@media(max-width:560px){.fps-workout-list>li{flex-wrap:wrap}.fps-item-actions{width:100%;justify-content:flex-start}.fps-item-actions button{min-height:42px}.fps-swap-inline label{flex-basis:100%}}
+
+.fps-timer-hero{text-align:center}
+.fps-watch{position:relative;width:min(350px,100%);aspect-ratio:1;margin:30px auto 20px;isolation:isolate;--fps-progress-angle:0deg;--fps-hand-angle:0deg}
+.fps-watch-crown{position:absolute;width:47px;height:24px;top:-12px;left:50%;transform:translateX(-50%);border:5px solid #8595a0;border-bottom:0;border-radius:9px 9px 1px 1px;background:#253038}
+.fps-watch-face{position:absolute;inset:0;border:8px solid #8ca0a5;border-radius:50%;overflow:hidden;background:radial-gradient(circle,#24383e 0%,#1d2b32 70%,#141d22 100%);box-shadow:0 12px 20px rgba(0,0,0,.28),inset 0 0 0 5px #202c32,inset 0 0 18px rgba(0,0,0,.3)}
+.fps-watch-track{position:absolute;inset:14px;border:9px solid #40544a;border-radius:50%}
+.fps-watch-progress{position:absolute;inset:14px;border-radius:50%;background:conic-gradient(from 0deg,var(--primary-3,#52e58a) 0deg,var(--primary-3,#52e58a) var(--fps-progress-angle),transparent var(--fps-progress-angle),transparent 360deg);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 10px),#000 calc(100% - 9px));mask:radial-gradient(farthest-side,transparent calc(100% - 10px),#000 calc(100% - 9px))}
+.fps-watch-ticks{position:absolute;inset:0;pointer-events:none}
+.fps-watch-tick{position:absolute;inset:0;transform:rotate(var(--fps-tick-angle));pointer-events:none}
+.fps-watch-tick::before{content:"";position:absolute;top:31px;left:calc(50% - 1px);width:2px;height:7px;border-radius:2px;background:#92aaa2}
+.fps-watch-tick.fps-watch-major::before{top:27px;left:calc(50% - 2px);width:4px;height:12px;background:#ebf8f0}
+.fps-watch-mark{position:absolute;color:var(--text,#eef6f0);font-size:1rem;font-weight:800;line-height:1;transform:translate(-50%,-50%)}
+.fps-watch-mark-top{top:19%;left:50%}.fps-watch-mark-right{top:50%;left:81%}.fps-watch-mark-bottom{top:81%;left:50%}.fps-watch-mark-left{top:50%;left:19%}
+.fps-watch-hand{position:absolute;inset:0;transform:rotate(var(--fps-hand-angle));pointer-events:none}
+.fps-watch-hand::before{content:"";position:absolute;left:calc(50% - 2px);top:25%;height:25%;width:4px;border-radius:4px;background:#ffb84c;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.fps-watch-pin{position:absolute;left:50%;top:50%;width:17px;height:17px;transform:translate(-50%,-50%);border:2px solid #a76119;border-radius:50%;background:#ffb84c}
+.fps-watch-screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:62px;pointer-events:none}
+.fps-watch-screen span{font-weight:800;letter-spacing:.11em;font-size:.78rem}
+.fps-watch-screen strong{font-size:clamp(2.4rem,9vw,3.5rem);font-variant-numeric:tabular-nums;line-height:1.15;text-shadow:0 2px 4px rgba(0,0,0,.2)}
+.fps-watch-screen small{font-size:.82rem;color:var(--muted,#9fb4a8)}
+.fps-watch[data-phase="rest"] .fps-watch-progress{background:conic-gradient(from 0deg,#68c5ff 0deg,#68c5ff var(--fps-progress-angle),transparent var(--fps-progress-angle),transparent 360deg)}
+.fps-watch[data-phase="rest"] .fps-watch-screen span{color:#8dd8ff}
+.fps-watch[data-state="done"] .fps-watch-progress{background:conic-gradient(from 0deg,var(--primary-3,#52e58a) 0deg,var(--primary-3,#52e58a) var(--fps-progress-angle),transparent var(--fps-progress-angle),transparent 360deg)}
+.fps-controls{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.fps-start button:disabled{opacity:.45;cursor:not-allowed}
+.fps-timer-settings{border-top:1px solid var(--line-2,#284838);margin-top:24px;padding-top:16px}
+.fps-timer-settings button{margin-top:10px}
+.fps-timer-options{display:grid;gap:10px;padding:14px;margin:16px 0;border:1px solid var(--line-2,#284838);border-radius:12px}
+.fps-timer-options label{display:flex;align-items:center;gap:10px;min-height:44px;font-weight:400}
+.fps-timer-options input[type="checkbox"]{width:22px;min-height:22px;height:22px;flex:0 0 22px;accent-color:var(--primary,#30c56c)}
+.fps-background-hint{font-size:.9rem}
+.fps-touch-lock{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:18px;padding:24px;text-align:center;background:var(--card,#111d17);color:var(--text,#fff);touch-action:none;user-select:none}
+.fps-touch-lock>strong{font-size:clamp(4rem,17vw,9rem);font-variant-numeric:tabular-nums;line-height:1.1}
+.fps-touch-lock>span{font-weight:800;letter-spacing:.1em}
+.fps-touch-lock button{min-height:64px;max-width:100%;white-space:normal;touch-action:none}
+.fps-touch-lock small{color:var(--muted,#9fb4a8)}
+.fps-watch[data-state="countdown"] .fps-watch-screen strong{font-size:4rem}
+@media(max-width:750px){.fps-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.fps-fields{grid-template-columns:1fr 1fr}.fps-fields>label:last-child{grid-column:1/-1}.fps-picker{grid-template-columns:1fr}.fps-picker label,.fps-picker input,.fps-picker select,.fps-picker button{grid-row:auto;grid-column:1}.fps-picker label[for="fpsExerciseSelect"]{margin-top:8px}}
+@media(max-width:470px){.fps-start [role="tabpanel"]{padding:13px}.fps-fields{grid-template-columns:1fr}.fps-fields>label:last-child{grid-column:auto}.fps-watch{width:min(320px,88vw)}.fps-watch-screen strong{font-size:2.5rem}.fps-custom-row label{flex:1 1 100%}.fps-config-footer button,.fps-controls button{flex:1 1 42%}}
+
+.fps-kb-shortcut{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;border:1px solid var(--line-3,#335c47);border-radius:14px;background:var(--panel-2,#101d16);padding:15px;margin:16px 0}
+.fps-kb-shortcut strong{font-size:1.07rem}.fps-kb-shortcut p{margin-bottom:0}
+@media(max-width:480px){.fps-kb-shortcut button{width:100%}}
+
+.fps-sport-links{margin:16px 0 18px;border-top:1px solid var(--line-2,#284838);padding-top:14px}
+.fps-sport-links h5{font-size:1rem;margin:0 0 7px}
+.fps-sport-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px;margin-top:12px}
+.fps-sport-grid button{min-height:44px;white-space:normal;text-align:center}
+
+/* WIEDORA-CHANGE: WD-20261031-WIE-117-TRAINING-HISTORY-03 | TASK: WIE-117 | AUTHOR: ChatGPT / GPT-6 */
+/* Pilot program content is scoped to Start and never affects other apps. */
+.fps-pilot-preview{display:grid;gap:6px;min-width:0}
+.fps-pilot-preview h6{margin:0;font-size:1rem}
+.fps-pilot-preview .fps-workout-list{margin:4px 0 10px}
+.fps-pilot-preview .fps-workout-list>li{padding:8px 10px;min-height:40px}
+.fps-pilot-finish{display:grid;gap:10px;text-align:left;margin:18px 0 4px;padding:14px;border:1px solid var(--line-2,#284838);border-radius:14px;background:var(--panel-2,#101d16)}
+.fps-pilot-finish h5{font-size:1rem;margin:0}
+.fps-pilot-finish .action-button{justify-self:start;max-width:100%;white-space:normal}
+.fps-pilot-finish label{display:grid;gap:7px;max-width:420px}
+.fps-pilot-finish select{min-height:44px}
+@media(max-width:520px){.fps-pilot-finish .action-button{width:100%;justify-self:stretch}}
+
+/* WIEDORA-CHANGE: WD-20261031-WIE-185-SETS-ENGINE-07 | TASK: WIE-185 | AUTHOR: ChatGPT / GPT-6 */
+.fps-set-fields{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.fps-set-fields label{min-width:0}
+.fps-pilot-finish .action-row{display:flex;gap:10px;flex-wrap:wrap}
+.fps-pilot-finish .fps-workout-list>li{font-size:.92rem;min-width:0;overflow-wrap:anywhere}
+.fps-pilot-finish select,.fps-set-fields input{max-width:100%}
+@media(max-width:860px){.fps-set-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.fps-set-fields{grid-template-columns:minmax(0,1fr)}}
+
+/* WIEDORA-CHANGE: WD-20261031-WIE-110-PUSHUP100-01 | TASK: WIE-110 | AUTHOR: ChatGPT / GPT-6 */
+/* Bespoke progress artwork is CSS-only. No copyrighted image dependencies. */
+.fpk-pu[hidden], .fpk-pu #fpkPuWorkout[hidden]{display:none!important}
+.fpk-pu{display:grid;gap:18px;min-width:0;padding-block:12px}
+.fpk-pu-hero{display:grid;grid-template-columns:164px minmax(0,1fr);gap:20px;align-items:center;padding:20px;border:1px solid color-mix(in srgb,var(--accent,#6cd4a9) 28%,transparent);border-radius:18px;background:linear-gradient(115deg,color-mix(in srgb,var(--accent,#429b86) 15%,transparent),transparent 70%)}
+.fpk-pu-ring{--pu-percent:0%;width:156px;height:156px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--accent,#4dcf9f) var(--pu-percent),color-mix(in srgb,var(--accent,#4dcf9f) 20%,transparent) var(--pu-percent));box-shadow:0 0 0 1px color-mix(in srgb,var(--accent,#4dcf9f) 25%,transparent)}
+.fpk-pu-ring>div{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:50%;width:120px;height:120px;background:var(--panel,#16251f);color:var(--text,#f1f7f4)}
+.fpk-pu-ring strong{font-size:2.65rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.fpk-pu-ring small{font-size:.82rem;opacity:.85}
+.fpk-pu-eyebrow{text-transform:uppercase;font-size:.75rem;letter-spacing:.12em;font-weight:700;opacity:.8}
+.fpk-pu-hero-text h4{font-size:1.35rem;margin:4px 0 8px}
+.fpk-pu-hero-text p{margin:7px 0}
+.fpk-pu-level-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.fpk-pu-level-grid>div{display:grid;gap:5px;border-radius:12px;padding:12px;border:1px solid color-mix(in srgb,currentColor 18%,transparent)}
+.fpk-pu-level-grid span{font-size:.85rem;opacity:.8}
+.fpk-pu-level-grid>div[data-active="true"]{border-color:var(--accent,#4dcf9f);box-shadow:inset 0 0 0 1px var(--accent,#4dcf9f);background:color-mix(in srgb,var(--accent,#4dcf9f) 12%,transparent)}
+.fpk-pu-test{display:grid;gap:12px;padding:16px;border-radius:12px;border:1px solid color-mix(in srgb,currentColor 15%,transparent)}
+.fpk-pu-test label{font-weight:700;display:block;margin-bottom:7px}
+.fpk-pu-test input{width:min(100%,240px);font-size:1.1rem;min-height:44px}
+.fpk-pu-test .primary{justify-self:start;min-height:44px}
+.fpk-pu-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.fpk-pu-summary>div{display:flex;flex-direction:column;gap:4px;padding:11px;border:1px solid color-mix(in srgb,currentColor 16%,transparent);border-radius:12px}
+.fpk-pu-summary span{font-size:.8rem;opacity:.78}
+.fpk-pu-summary strong{font-size:1.15rem;font-variant-numeric:tabular-nums}
+.fpk-pu-session-head{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:12px 0}
+.fpk-pu-session-head h5{margin:0 0 6px;font-size:1.12rem}
+.fpk-pu-total{text-align:center;min-width:100px}
+.fpk-pu-total strong{display:block;font-size:2rem;font-variant-numeric:tabular-nums}
+.fpk-pu-total small{font-size:.75rem;opacity:.8}
+.fpk-pu-sets{list-style:none;counter-reset:pushup;padding:0;display:grid;gap:8px}
+.fpk-pu-set{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid color-mix(in srgb,currentColor 18%,transparent);border-radius:12px;padding:10px 14px;counter-increment:pushup}
+.fpk-pu-set-label{display:flex;flex-direction:column;gap:3px}
+.fpk-pu-set-label small{opacity:.75}
+.fpk-pu-input-label{display:flex;gap:8px;align-items:center;font-size:.85rem}
+.fpk-pu-input-label input{width:92px;min-height:44px;font-size:1rem}
+.fpk-pu-history{border-top:1px solid color-mix(in srgb,currentColor 18%,transparent);padding-top:12px}
+.fpk-pu-history ol{padding-left:24px}
+.fpk-pu-history li{padding:5px}
+.fpk-pu .action-button:focus-visible,.fpk-pu input:focus-visible{outline:3px solid var(--accent,#4dcf9f);outline-offset:2px}
+@media(max-width:740px){.fpk-pu-hero{grid-template-columns:1fr;justify-items:start}.fpk-pu-level-grid{grid-template-columns:1fr 1fr}.fpk-pu-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.fpk-pu-hero{padding:12px}.fpk-pu-level-grid{grid-template-columns:1fr}.fpk-pu-set{padding:10px;gap:6px}.fpk-pu-input-label{flex-direction:column;align-items:flex-end}}
+
+/* WIEDORA-CHANGE: WD-20261031-WIE-110-PUSHUP100-01 | TASK: WIE-110 | AUTHOR: ChatGPT / GPT-6 */
+.fpk-pu-roadmap{border:1px solid color-mix(in srgb,currentColor 16%,transparent);border-radius:12px;padding:12px;min-width:0}
+.fpk-pu-roadmap summary{cursor:pointer;min-height:40px;display:list-item;padding:8px 4px;font-weight:700}
+.fpk-pu-table-scroll{overflow-x:auto;overscroll-behavior-inline:contain}
+.fpk-pu-table{border-collapse:collapse;width:100%;font-size:.83rem;min-width:570px;font-variant-numeric:tabular-nums}
+.fpk-pu-table th,.fpk-pu-table td{padding:10px 8px;border-bottom:1px solid color-mix(in srgb,currentColor 14%,transparent);text-align:left}
+.fpk-pu-table th:first-child{white-space:nowrap}
+.fpk-pu-current-week{background:color-mix(in srgb,var(--accent,#4dcf9f) 8%,transparent)}
+.fpk-pu-current-cell{font-weight:750;outline:1px solid var(--accent,#4dcf9f);outline-offset:-1px}
+
+/* WIEDORA-CHANGE: WD-20261031-WIE-110-PUSHUP100-01 | TASK: WIE-110 | AUTHOR: ChatGPT / GPT-6 */
+.fpk-pu-technique{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--accent,#4dcf9f) 8%,transparent);border:1px solid color-mix(in srgb,var(--accent,#4dcf9f) 24%,transparent)}
+.fpk-pu-technique>div{flex:1 1 230px}
+.fpk-pu-technique p{margin:4px 0 0;font-size:.89rem}
+.fpk-pu-technique .action-button{flex:0 0 auto;min-height:44px;white-space:normal}
+
+/* WIEDORA-CHANGE: WD-20261031-WIE-115-LOAD-CYCLE-02 | TASK: WIE-115 | AUTHOR: ChatGPT / GPT-6 */
+.fpk-pu-settings{padding:14px;border:1px solid color-mix(in srgb,currentColor 18%,transparent);border-radius:14px;display:grid;gap:10px}
+.fpk-pu-settings h5{margin:0;font-size:1.04rem}
+.fpk-pu-config{display:grid;grid-template-columns:repeat(2,minmax(0,1fr)) auto;gap:12px;align-items:end;padding:10px 0}
+.fpk-pu-config>label,.fpk-pu-recovery label{display:flex;flex-direction:column;gap:6px;font-size:.94rem}
+.fpk-pu-config select,.fpk-pu-config input,.fpk-pu-recovery select{width:100%;max-width:100%;min-height:44px}
+.fpk-pu-config .action-button{min-height:44px}
+.fpk-pu-cycle{display:flex;flex-wrap:wrap;gap:6px}
+.fpk-pu-day-pill{border:1px solid color-mix(in srgb,currentColor 18%,transparent);border-radius:9px;padding:6px 9px;font-size:.84rem}
+.fpk-pu-day-pill[data-kind="workout"]{border-color:var(--accent,#4dcf9f);background:color-mix(in srgb,var(--accent,#4dcf9f) 12%,transparent);font-weight:700}
+.fpk-pu-recovery{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);align-items:center;gap:12px;margin-block:10px}
+.fpk-pu-recovery p{margin:0}
+.fpk-pu-config[hidden]{display:none!important}
+@media(max-width:680px){.fpk-pu-config{grid-template-columns:1fr}.fpk-pu-config .action-button{justify-self:stretch}.fpk-pu-recovery{grid-template-columns:1fr}}
+
+/* WIEDORA-CHANGE: WD-20261101-WIE-110-KB-FBW-01 | TASK: WIE-110 | AUTHOR: ChatGPT / GPT-6 */
+.fpk-kbc[hidden],.fpk-kbc [hidden],.fpk-kbc-quick[hidden]{display:none!important}
+.fpk-kbc{display:grid;gap:16px;min-width:0;margin-top:14px}
+.fpk-kbc-quick{margin:12px 0;display:grid}
+.fpk-kbc-quick-btn{display:grid;gap:4px;text-align:left;padding:14px 18px;min-height:58px;border-radius:13px;border:1px solid color-mix(in srgb,var(--accent,#4dcf9f) 50%,transparent);background:color-mix(in srgb,var(--accent,#4dcf9f) 12%,transparent)}
+.fpk-kbc-quick-btn small{opacity:.82;font-size:.78rem}
+.fpk-kbc-hero{display:flex;justify-content:space-between;align-items:center;gap:22px;border:1px solid color-mix(in srgb,var(--accent,#4dcf9f) 30%,transparent);border-radius:18px;padding:18px;background:linear-gradient(110deg,color-mix(in srgb,var(--accent,#4dcf9f) 13%,transparent),transparent)}
+.fpk-kbc-hero>div:first-child{flex:1 1 240px}
+.fpk-kbc-hero h4{font-size:1.35rem;margin:5px 0 9px}
+.fpk-kbc-hero p{margin:7px 0}
+.fpk-kbc-eyebrow{font-size:.76rem;letter-spacing:.08em;font-weight:750}
+.fpk-kbc-emblem{display:grid;place-content:center;gap:2px;text-align:center;width:120px;height:120px;flex:0 0 120px;border-radius:50% 50% 42% 42%;border:6px solid color-mix(in srgb,var(--accent,#4dcf9f) 55%,transparent);font-weight:850;font-size:2.1rem;background:color-mix(in srgb,var(--accent,#4dcf9f) 18%,transparent)}
+.fpk-kbc-emblem small{font-size:.7rem;letter-spacing:.16em}
+.fpk-kbc-config{display:grid;gap:12px;padding:15px;border:1px solid color-mix(in srgb,currentColor 18%,transparent);border-radius:14px}
+.fpk-kbc-config h5{margin:0}
+.fpk-kbc-config-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.fpk-kbc-config-grid label{display:flex;flex-direction:column;gap:5px;font-weight:650;font-size:.9rem}
+.fpk-kbc-config-grid select{width:100%;min-height:44px;min-width:0}
+.fpk-kbc-config .primary{justify-self:start;min-height:44px}
+.fpk-kbc-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.fpk-kbc-stats>div{padding:12px;border:1px solid color-mix(in srgb,currentColor 17%,transparent);border-radius:12px;display:grid;gap:5px}
+.fpk-kbc-stats span{font-size:.76rem;opacity:.78}
+.fpk-kbc-stats strong{font-size:1.35rem;font-variant-numeric:tabular-nums}
+.fpk-kbc-trend{font-size:.92rem;font-weight:650}
+.fpk-kbc-session-head{display:flex;gap:12px;justify-content:space-between;align-items:center}
+.fpk-kbc-session-head h5{font-size:1.1rem;margin:0}
+.fpk-kbc-log-scroll{max-width:100%;overflow-x:auto}
+.fpk-kbc-log{width:100%;min-width:790px;border-collapse:collapse;font-size:.86rem}
+.fpk-kbc-log th,.fpk-kbc-log td{padding:10px 8px;vertical-align:middle;text-align:left;border-bottom:1px solid color-mix(in srgb,currentColor 15%,transparent)}
+.fpk-kbc-log tbody tr:nth-child(even){background:color-mix(in srgb,currentColor 3%,transparent)}
+.fpk-kbc-log td:first-child{min-width:195px}
+.fpk-kbc-log td small{display:block;font-size:.73rem;opacity:.78;line-height:1.4;margin-top:3px}
+.fpk-kbc-log input{width:94px;min-height:44px;font-size:1rem}
+.fpk-kbc-log select{width:112px;min-height:44px}
+.fpk-kbc-history{border-top:1px solid color-mix(in srgb,currentColor 15%,transparent);padding-top:12px}
+.fpk-kbc-history ol{padding-left:22px}
+.fpk-kbc-history li{padding-block:5px}
+.fpk-kbc :is(input,select,button):focus-visible{outline:3px solid var(--accent,#4dcf9f);outline-offset:2px}
+@media(max-width:900px){.fpk-kbc-config-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fpk-kbc-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.fpk-kbc-hero{padding:12px;align-items:flex-start}.fpk-kbc-emblem{display:none}.fpk-kbc-config-grid{grid-template-columns:1fr}.fpk-kbc-session-head{flex-wrap:wrap}.fpk-kbc-stats strong{font-size:1.15rem}}
+
+/* WIEDORA-CHANGE: WD-20261101-WIE-110-KB-FBW-01 | TASK: WIE-117 | AUTHOR: ChatGPT / GPT-6 */
+.fpd-kettlebell-progress{margin-block:18px;padding:16px;border-radius:14px;border:1px solid color-mix(in srgb,var(--accent,#4dcf9f) 30%,transparent)}
+.fpd-kettlebell-progress h4{margin:0 0 14px}
+.fpd-kettlebell-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.fpd-kettlebell-stat{padding:10px;border:1px solid color-mix(in srgb,currentColor 16%,transparent);border-radius:10px;display:grid;gap:5px}
+.fpd-kettlebell-stat small{font-size:.78rem;opacity:.8}
+.fpd-kettlebell-stat strong{font-variant-numeric:tabular-nums}
+@media(max-width:650px){.fpd-kettlebell-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* WIEDORA-CHANGE: WD-20261101-WIE-110-KB-FBW-01 | TASK: WIE-117 | AUTHOR: ChatGPT / GPT-6 */
+.fpd-kettlebell-chart{margin-block:14px}
+.fpd-kettlebell-chart h5{margin:0 0 9px}
+.fpd-kettlebell-bars{display:flex;align-items:flex-end;gap:12px;height:132px;border-bottom:1px solid color-mix(in srgb,currentColor 20%,transparent)}
+.fpd-kettlebell-bar{flex:1;min-width:0;height:100%;display:flex;flex-direction:column;justify-content:end;align-items:stretch;gap:5px}
+.fpd-kettlebell-bar-fill{width:100%;border-radius:6px 6px 0 0;background:var(--accent,#4dcf9f);min-height:4px;max-height:104px}
+.fpd-kettlebell-bar small{font-size:.7rem;text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums}
+@media(max-width:440px){.fpd-kettlebell-bars{gap:6px}.fpd-kettlebell-bar small{font-size:.6rem}}
+
+/* WIEDORA-CHANGE: WD-20261101-WIE-110-KB-UX-FIX-02 | TASK: WIE-110 | AUTHOR: ChatGPT / GPT-6 */
+.fpk-kbc-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:0;margin:0;list-style:none}
+.fpk-kbc-steps li{padding:12px 14px;display:grid;gap:5px;border:1px solid color-mix(in srgb,var(--accent,#4dcf9f) 24%,transparent);border-radius:12px;background:color-mix(in srgb,var(--accent,#4dcf9f) 6%,transparent)}
+.fpk-kbc-steps strong{font-size:.9rem}.fpk-kbc-steps span{font-size:.81rem;opacity:.83}
+.fpk-kbc-config{background:color-mix(in srgb,var(--accent,#4dcf9f) 3%,transparent)}
+.fpk-kbc-stats>div{background:color-mix(in srgb,var(--accent,#4dcf9f) 6%,transparent)}
+.fpk-kbc-filled{margin:0 0 12px;font-weight:700;font-variant-numeric:tabular-nums}
+.fpk-kbc-reuse{display:block;margin-top:6px;font-size:.75rem;line-height:1.4;padding:4px 7px;border-radius:7px;background:transparent;color:inherit;border:1px solid color-mix(in srgb,var(--accent,#4dcf9f) 50%,transparent);cursor:pointer;text-align:left}
+.fpk-kbc-reuse:hover{background:color-mix(in srgb,var(--accent,#4dcf9f) 10%,transparent)}
+@media(max-width:700px){
+ .fpk-kbc-steps{grid-template-columns:1fr}.fpk-kbc-steps li{padding:10px 12px;grid-template-columns:auto 1fr;align-items:center;gap:12px}
+ .fpk-kbc-log-scroll{overflow:visible}.fpk-kbc-log{min-width:0;width:100%;display:block}
+ .fpk-kbc-log thead{display:none}.fpk-kbc-log tbody{display:grid;gap:12px}
+ .fpk-kbc-log tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:12px;border:1px solid color-mix(in srgb,currentColor 17%,transparent);border-radius:14px;background:color-mix(in srgb,var(--accent,#4dcf9f) 5%,transparent)}
+ .fpk-kbc-log td{display:grid;gap:5px;padding:3px;min-width:0;border:0}.fpk-kbc-log td:first-child{grid-column:1/-1;min-width:0;padding-bottom:8px;border-bottom:1px solid color-mix(in srgb,currentColor 14%,transparent)}
+ .fpk-kbc-log td:not(:first-child)::before{content:attr(data-label);font-size:.77rem;opacity:.8;font-weight:700}
+ .fpk-kbc-log td:first-child strong{font-size:1rem}.fpk-kbc-log input,.fpk-kbc-log select{width:100%;max-width:100%;min-width:0;min-height:44px}
+ .fpk-kbc-reuse{width:100%}
+}
+
+/* WIEDORA-CHANGE: WD-20261101-WIE-115-CALISTHENICS-01 | TASK: WIE-115/WIE-110 | AUTHOR: ChatGPT / GPT-6 */
+/* Responsive, theme-inheriting calisthenics academy. Focus and touch areas are intentionally visible. */
+.fpk-cali-controls{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;align-items:end}
+.fpk-cali-controls>input,.fpk-cali-controls>select{flex:1 1 210px;min-width:0;min-height:46px}
+.fpk-cali-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,225px),1fr));gap:12px;margin:12px 0 20px}
+.fpk-cali-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;text-align:left;gap:9px;min-height:125px;padding:16px;border-radius:15px;border:1px solid color-mix(in srgb,var(--accent,#4dcf9f) 26%,currentColor 10%);background:color-mix(in srgb,var(--accent,#4dcf9f) 5%,transparent)}
+.fpk-cali-card:hover,.fpk-cali-card:focus-visible{background:color-mix(in srgb,var(--accent,#4dcf9f) 12%,transparent);border-color:var(--accent,#4dcf9f)}
+.fpk-cali-card strong{font-size:1.05rem;line-height:1.35}
+.fpk-cali-card small{font-size:.78rem;line-height:1.5;opacity:.82}
+.fpk-cali-eyebrow{font-size:.73rem;letter-spacing:.06em;font-weight:800;text-transform:uppercase;opacity:.83}
+.fpk-cali-hero{padding:18px 20px;border-radius:18px;background:linear-gradient(120deg,color-mix(in srgb,var(--accent,#4dcf9f) 15%,transparent),transparent);border:1px solid color-mix(in srgb,var(--accent,#4dcf9f) 25%,transparent);margin:12px 0}
+.fpk-cali-hero h4{font-size:clamp(1.2rem,2.6vw,1.7rem);margin:6px 0}
+.fpk-cali-hero p{max-width:75ch;line-height:1.6}
+.fpk-cali-equipment{font-weight:650}
+.fpk-cali-notice{border-left:4px solid color-mix(in srgb,var(--accent,#4dcf9f) 75%,currentColor);padding:12px 14px;background:color-mix(in srgb,var(--accent,#4dcf9f) 5%,transparent);line-height:1.55}
+.fpk-cali-status{font-weight:750;line-height:1.5}
+.fpk-cali-steps{display:grid;gap:12px;margin:20px 0}
+.fpk-cali-steps h5{margin:2px 0}
+.fpk-cali-step{display:grid;grid-template-columns:1fr auto;gap:5px 12px;align-items:start;padding:13px 15px;border:1px solid color-mix(in srgb,currentColor 18%,transparent);border-radius:12px}
+.fpk-cali-step strong{font-size:.93rem}
+.fpk-cali-step small{grid-column:1/-1;line-height:1.55;opacity:.84;overflow-wrap:anywhere}
+.fpk-cali-step[data-state=active]{border-color:var(--accent,#4dcf9f);background:color-mix(in srgb,var(--accent,#4dcf9f) 10%,transparent)}
+.fpk-cali-step[data-state=done]{border-color:color-mix(in srgb,var(--accent,#4dcf9f) 46%,transparent)}
+.fpk-cali-pill{justify-self:end;font-size:.68rem;font-weight:800;padding:5px 8px;border-radius:99px;background:color-mix(in srgb,var(--accent,#4dcf9f) 14%,transparent)}
+.fpk-cali-panel{padding:18px;border:1px solid color-mix(in srgb,currentColor 15%,transparent);border-radius:14px;margin:18px 0;display:grid;gap:12px}
+.fpk-cali-panel h5{margin:0;font-size:1.02rem}
+.fpk-cali-panel>p{margin:0}
+.fpk-cali-panel select{min-height:46px;width:100%}
+.fpk-cali-panel label{display:grid;gap:6px;min-width:0;font-size:.9rem;font-weight:650}
+.fpk-cali-check{display:flex!important;flex-direction:row;align-items:flex-start;gap:11px;line-height:1.45}
+.fpk-cali-check input{width:18px;min-width:18px;height:18px;margin-top:3px;accent-color:var(--accent,#4dcf9f)}
+.fpk-cali-check span{flex:1}
+.fpk-cali-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}
+.fpk-cali-stats>div{padding:13px 12px;border:1px solid color-mix(in srgb,currentColor 17%,transparent);border-radius:12px;display:grid;gap:6px;background:color-mix(in srgb,var(--accent,#4dcf9f) 6%,transparent)}
+.fpk-cali-stats span{font-size:.75rem;opacity:.8}
+.fpk-cali-stats strong{font-size:1.2rem;font-variant-numeric:tabular-nums}
+.fpk-cali-session{border:1px solid color-mix(in srgb,currentColor 16%,transparent);border-radius:12px;padding:12px}
+.fpk-cali-session summary{cursor:pointer;font-weight:750;line-height:1.5}
+.fpk-cali-session ol{margin:13px 0 4px;padding-left:20px}
+.fpk-cali-exercise{padding:9px 0;border-bottom:1px solid color-mix(in srgb,currentColor 11%,transparent)}
+.fpk-cali-exercise span,.fpk-cali-exercise small{display:block;line-height:1.5}
+.fpk-cali-exercise small{opacity:.79}
+.fpk-cali-exercise button{margin-top:5px;min-height:42px}
+.fpk-cali-set-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.fpk-cali-set-grid input{width:100%;min-width:0;min-height:46px;font-size:1rem}
+.fpk-cali-panel button.primary{min-height:48px;justify-self:start}
+.fpk-cali-panel :is(input,select,button):focus-visible,.fpk-cali-card:focus-visible{outline:3px solid var(--accent,#4dcf9f);outline-offset:3px}
+@media(max-width:800px){.fpk-cali-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){
+ .fpk-cali-grid{grid-template-columns:1fr}.fpk-cali-card{min-height:104px;padding:13px}
+ .fpk-cali-hero,.fpk-cali-panel{padding:13px}
+ .fpk-cali-step{grid-template-columns:1fr}.fpk-cali-pill{justify-self:start}
+ .fpk-cali-set-grid{grid-template-columns:1fr}
+ .fpk-cali-panel button.primary{width:100%}
+}
+@media(prefers-reduced-motion:reduce){.fpk-cali-card{transition:none}}
+
+/* WIEDORA-CHANGE: WD-20261101-WIE-115-CALISTHENICS-01 | TASK: WIE-115 | AUTHOR: ChatGPT / GPT-6 */
+.fpk-cali-accessories{border:1px solid color-mix(in srgb,currentColor 18%,transparent);border-radius:12px;padding:13px}
+.fpk-cali-accessories>summary{font-weight:800;cursor:pointer}
+.fpk-cali-accessory{display:grid;gap:9px;padding:13px 0;border-bottom:1px solid color-mix(in srgb,currentColor 12%,transparent)}
+.fpk-cali-accessory:last-child{border-bottom:0}
+.fpk-cali-accessory>strong{font-size:.93rem}
+.fpk-cali-accessory .fpk-cali-set-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fpk-cali-accessories input{min-height:46px;width:100%;min-width:0}
+@media(max-width:540px){.fpk-cali-accessory .fpk-cali-set-grid{grid-template-columns:1fr}}
+
+
+/* WD-20261101-WIE-110-FITPLAN-UX-02 — reusable FBW quick start and guide cards. */
+.fps-form.fps-hint:has(#fpsPresetTitle){padding:clamp(14px,2vw,22px);border:1px solid var(--line-3,#335c47);border-radius:18px;background:linear-gradient(145deg,var(--panel-2,#101d16),var(--card,#111d17));}
+.fps-small-tag{display:inline-block;vertical-align:middle;padding:4px 9px;margin-left:8px;border:1px solid var(--line-3,#335c47);border-radius:100px;color:var(--muted,#9fb4a8);font-size:.72rem;font-weight:600}
+.fps-template-quick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:6px 0 8px}
+.fps-template-choice{display:flex;text-align:left;gap:12px;align-items:center;min-width:0;min-height:102px;padding:14px;border:1px solid var(--line-3,#335c47);border-radius:15px;background:var(--card-2,#0d1712);color:var(--text,#eef6f0);cursor:pointer;transition:border-color .18s ease,background .18s ease}
+.fps-template-choice>span:last-child{display:grid;gap:5px;min-width:0}
+.fps-template-choice strong{font-size:1.03rem}.fps-template-choice small{color:var(--muted,#9fb4a8);line-height:1.5;font-size:.84rem}
+.fps-template-icon{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:13px;background:rgba(48,197,108,.12);border:1px solid var(--line-3,#335c47);font-size:1.4rem}
+.fps-template-choice[aria-pressed="true"]{border-color:var(--primary,#30c56c);background:var(--panel-soft,#15261d);box-shadow:inset 0 0 0 1px var(--primary,#30c56c)}
+.fps-template-choice:hover{border-color:var(--primary-3,#52e58a)}
+.fps-template-choice:focus-visible{outline:3px solid var(--primary-3,#52e58a);outline-offset:3px}
+.fps-guidance-caption{padding:10px 12px;margin:4px 0;color:var(--muted,#9fb4a8);border-radius:10px;background:var(--panel-2,#101d16);font-size:.86rem;line-height:1.5}
+.fps-pilot-preview #fpsPresetPreview{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:10px 0}
+.fps-pilot-preview #fpsPresetPreview>li.fps-guide-row{display:flex;align-items:center;gap:11px;min-height:96px;padding:12px;background:var(--panel-2,#101d16);border:1px solid var(--line-2,#284838);border-radius:14px}
+.fps-guide-number{display:grid;place-items:center;flex:none;width:34px;height:34px;border:1px solid var(--line-3,#335c47);border-radius:10px;color:var(--primary-3,#52e58a);font-weight:800;font-variant-numeric:tabular-nums}
+.fps-guide-copy{display:grid;gap:4px;min-width:0;flex:1 1 130px;overflow-wrap:anywhere}
+.fps-guide-copy strong{font-size:.95rem;line-height:1.3}.fps-guide-copy small{font-size:.78rem}
+.fps-guide-dose{font-size:.84rem;font-weight:700;color:var(--primary-3,#52e58a)}
+.fps-guide-detail{flex:none;min-height:42px;padding:8px 10px;font-size:.83rem}
+.fps-swap-inline .fps-swap-intro,.fps-swap-inline .fps-swap-note{flex:1 1 100%;margin:0;font-size:.87rem;line-height:1.5}
+.fps-swap-inline .fps-swap-intro{font-weight:650}.fps-swap-inline .fps-swap-note{color:var(--muted,#9fb4a8)}
+.fps-swap-inline select{margin-top:4px}.fps-swap-inline button:disabled{opacity:.55;cursor:not-allowed}
+[data-fitplan-view="plan-treningowy"] .fpk-plan[data-fpk-plan="fbw"]{border-color:var(--primary,#30c56c);background:linear-gradient(135deg,rgba(48,197,108,.13),var(--card,#111d17))}
+[data-fitplan-view="plan-treningowy"] .fpk-kb-goal[data-fpk-kb-goal^="fbw-"]{min-height:140px;align-content:start;gap:11px;border-color:var(--line-3,#335c47);background:linear-gradient(140deg,rgba(48,197,108,.10),var(--card,#111d17));}
+[data-fitplan-view="plan-treningowy"] .fpk-kb-goal[data-fpk-kb-goal^="fbw-"]::before{content:"GOTOWY PLAN A/B";font-size:.68rem;letter-spacing:.09em;color:var(--primary-3,#52e58a);font-weight:800}
+[data-fitplan-view="plan-treningowy"] .fpk-kb-goal[data-fpk-kb-goal^="fbw-"]:hover{border-color:var(--primary,#30c56c)}
+@media(max-width:920px){.fps-pilot-preview #fpsPresetPreview{grid-template-columns:1fr}}
+@media(max-width:670px){.fps-template-quick{grid-template-columns:1fr}.fps-guide-detail{width:auto}.fps-pilot-preview #fpsPresetPreview>li.fps-guide-row{flex-wrap:wrap}.fps-guide-copy{flex:1 1 calc(100% - 52px)}.fps-guide-detail{margin-left:45px}}
+@media(prefers-reduced-motion:reduce){.fps-template-choice{transition:none}}
+
+/* Real previous-set hints and non-blocking recovery warning: compact on phones. */
+.fps-guide-previous{display:inline-flex;align-items:center;max-width:100%;width:fit-content;gap:5px;padding:5px 8px;margin-top:3px;color:var(--text,#eef6f0);font-size:.79rem;font-weight:700;border-radius:8px;background:var(--card-2,#0d1712);border:1px solid var(--line-3,#335c47)}
+.fps-plan-alert{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:6px 9px;color:var(--text,#eef6f0);font-size:.82rem;line-height:1.4;background:var(--panel-2,#101d16);border:1px solid var(--line-3,#335c47);border-radius:9px}
+#fpsTrainingCalendar>li:has(.fps-plan-alert){flex-wrap:wrap;justify-content:flex-start}
+#fpsTrainingCalendar .fps-plan-alert{margin-left:auto}
+@media(max-width:560px){#fpsTrainingCalendar .fps-plan-alert{margin-left:0;width:100%;justify-content:center}}
+
+/* WIEDORA-CHANGE: WD-20261101-FITPLAN-SYSTEMS-UX-01 | TASK: FitPlan systems UX | AUTHOR: ChatGPT / GPT-6 */
+/* Guided method discovery: scoped, responsive and readable in all three themes. */
+[data-fitplan-view="plan-treningowy"] .fpk-guide{display:grid;gap:18px;margin:18px 0 16px;padding:clamp(14px,3vw,24px);min-width:0;border:1px solid var(--line-3,#335c47);border-radius:18px;background:linear-gradient(145deg,color-mix(in srgb,var(--primary,#30c56c) 8%,var(--card,#111d17)),var(--card,#111d17))}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-heading h4{margin:4px 0 5px;font-size:clamp(1.18rem,2.4vw,1.55rem);line-height:1.3}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.12em;color:var(--primary-3,#52e58a)}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-fields label{display:grid;gap:8px;min-width:0;font-size:.92rem;font-weight:750;line-height:1.4}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-fields select{min-height:50px;width:100%;min-width:0;padding:9px 12px;border-radius:11px;border:1px solid var(--line-3,#335c47);color:var(--text,#fff);background:var(--panel,#0e1813);font:inherit}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-result-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-result-heading h5{margin:0 0 3px;font-size:1.08rem}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-result-heading p{margin:0;font-size:.86rem}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-result-heading button{min-height:44px;white-space:normal}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-pick{display:flex;align-items:flex-start;gap:10px;text-align:left;min-width:0;min-height:166px;padding:16px;border:1px solid var(--line-3,#335c47);border-radius:14px;color:var(--text,#fff);background:var(--panel-2,var(--card,#111d17));cursor:pointer;font:inherit;transition:border-color .14s,transform .14s}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-pick:hover{border-color:var(--primary,#30c56c);transform:translateY(-1px)}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-pick-number{flex:0 0 29px;width:29px;height:29px;display:grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--primary,#30c56c) 19%,transparent);font-weight:800}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-pick-body{display:grid;gap:8px;min-width:0;flex:1}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-pick-body strong{font-size:.98rem;line-height:1.3}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-pick-body small{color:var(--muted,#9fb4a8);font-size:.85rem;line-height:1.5}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-pick-body em{font-style:normal;font-size:.73rem;font-weight:750;color:var(--primary-3,#52e58a)}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-pick-action{font-size:.75rem;font-weight:700;align-self:flex-end;white-space:nowrap;color:var(--primary-3,#52e58a)}
+[data-fitplan-view="plan-treningowy"] .fpk-guide-disclaimer{font-size:.81rem;line-height:1.5;margin:10px 0 0;color:var(--muted,#9fb4a8)}
+[data-fitplan-view="plan-treningowy"] :is(.fpk-methods,.fpk-glossary){margin:14px 0;border:1px solid var(--line-3,#335c47);border-radius:13px;min-width:0}
+[data-fitplan-view="plan-treningowy"] :is(.fpk-methods,.fpk-glossary)>summary{cursor:pointer;min-height:54px;padding:15px 17px;font-weight:750;line-height:1.45}
+[data-fitplan-view="plan-treningowy"] .fpk-methods>summary span{display:block;font-size:.8rem;font-weight:400;color:var(--muted,#9fb4a8)}
+[data-fitplan-view="plan-treningowy"] .fpk-methods .fpk-plan-grid{margin:0;padding:0 14px 16px}
+[data-fitplan-view="plan-treningowy"] .fpk-plan{min-height:158px;align-content:start;padding:14px;grid-template-rows:auto auto auto}
+[data-fitplan-view="plan-treningowy"] .fpk-plan>span:first-child{grid-row:1/4}
+[data-fitplan-view="plan-treningowy"] .fpk-plan small{font-size:.84rem;line-height:1.5}
+[data-fitplan-view="plan-treningowy"] .fpk-plan-badge{grid-column:2;grid-row:3;font-size:.72rem!important;font-weight:750;color:var(--primary-3,#52e58a)!important}
+[data-fitplan-view="plan-treningowy"] .fpk-glossary dl{display:grid;grid-template-columns:minmax(95px,1fr) 2.5fr;gap:8px 14px;margin:0;padding:0 18px 18px}
+[data-fitplan-view="plan-treningowy"] .fpk-glossary dt{font-weight:800;font-size:.86rem}
+[data-fitplan-view="plan-treningowy"] .fpk-glossary dd{margin:0;font-size:.86rem;line-height:1.5;color:var(--muted,#9fb4a8)}
+[data-fitplan-view="plan-treningowy"] .fpk-kbc-quick-btn{min-height:66px}
+[data-fitplan-view="plan-treningowy"] :is(.fpk-guide-pick,.fpk-guide-fields select,.fpk-methods summary,.fpk-glossary summary):focus-visible{outline:3px solid var(--primary-3,#52e58a);outline-offset:3px}
+@media(max-width:1000px){[data-fitplan-view="plan-treningowy"] .fpk-guide-fields{grid-template-columns:1fr 1fr}[data-fitplan-view="plan-treningowy"] .fpk-guide-fields label:last-child{grid-column:1/-1}}
+@media(max-width:800px){[data-fitplan-view="plan-treningowy"] .fpk-guide-results{grid-template-columns:1fr}[data-fitplan-view="plan-treningowy"] .fpk-guide-pick{min-height:0;padding:14px}[data-fitplan-view="plan-treningowy"] .fpk-guide-pick-action{margin-left:auto}}
+@media(max-width:580px){[data-fitplan-view="plan-treningowy"] .fpk-guide-fields{grid-template-columns:1fr}[data-fitplan-view="plan-treningowy"] .fpk-guide-fields label:last-child{grid-column:auto}[data-fitplan-view="plan-treningowy"] .fpk-methods .fpk-plan-grid{padding:0 10px 12px}[data-fitplan-view="plan-treningowy"] .fpk-glossary dl{grid-template-columns:1fr;gap:4px}[data-fitplan-view="plan-treningowy"] .fpk-glossary dd{margin-bottom:9px}[data-fitplan-view="plan-treningowy"] .fpk-guide-result-heading button{width:100%}}
+@media(prefers-reduced-motion:reduce){[data-fitplan-view="plan-treningowy"] .fpk-guide-pick{transition:none}[data-fitplan-view="plan-treningowy"] .fpk-guide-pick:hover{transform:none}}
