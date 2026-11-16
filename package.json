@@ -1,0 +1,20 @@
+{
+  "name": "fitplan",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Standalone FitPlan module extracted from Wiedora",
+  "scripts": {
+    "test": "node --test tests/fitplan-*.test.cjs",
+    "check:fitplan": "npm test && npm run motion:validate",
+    "motion:validate": "node scripts/fitplan/validate-motion-manifest.mjs",
+    "motion:audit": "node scripts/fitplan/motion-quality-audit.cjs --json",
+    "motion:new": "node scripts/fitplan/create-motion-entry.mjs",
+    "test:browser": "node tests/fitplan-motion.browser.cjs && node tests/fitplan-offline-update.browser.cjs && node tests/fitplan-reports.browser.cjs"
+  },
+  "dependencies": {
+    "jsdom": "27.0.1"
+  },
+  "devDependencies": {
+    "fake-indexeddb": "6.2.6"
+  }
+}
