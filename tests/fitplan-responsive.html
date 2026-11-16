@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="pl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>FitPlan — kontrola szerokości ekranu</title>
+<style>
+body{margin:0;padding:16px;background:#eef1f5;color:#152033;font:16px system-ui}
+label{display:block;margin-bottom:12px}select{font:inherit;padding:8px}
+iframe{display:block;border:1px solid #8794a8;max-width:100%;background:#fff}
+</style>
+<label>Szerokość widoku
+<select aria-label="Szerokość widoku" onchange="document.getElementById('fitplanAuditFrame').style.width=this.value+'px'">
+<option value="320">320 px — mały telefon</option>
+<option value="390">390 px — telefon</option>
+<option value="650">650 px — duży telefon</option>
+<option value="768">768 px — tablet</option>
+<option value="1280">1280 px — komputer</option>
+</select></label>
+<iframe id="fitplanAuditFrame" title="FitPlan w wybranej szerokości" src="/apps/fitplan/" style="width:320px;height:844px"></iframe>
+</html>
