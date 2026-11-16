@@ -1,0 +1,186 @@
+<section class="fps-start" data-fitplan-view="start" aria-labelledby="fpsTitle">
+  <header class="fps-intro">
+    <h3 id="fpsTitle">Start treningu</h3>
+    <p class="muted">Przygotuj interwały, wybierz ćwiczenia lub uruchom sam stoper. Czasy są zapisywane na tym urządzeniu.</p>
+  </header>
+  <nav class="fps-tabs" role="tablist" aria-label="Tryb Start">
+    <button type="button" role="tab" id="fpsTabConfig" aria-controls="fpsPanelConfig" aria-selected="true" data-fps-tab="config">Konfiguracja</button>
+    <button type="button" role="tab" id="fpsTabPlan" aria-controls="fpsPanelPlan" aria-selected="false" tabindex="-1" data-fps-tab="plan">Trening według planu</button>
+    <button type="button" role="tab" id="fpsTabRandom" aria-controls="fpsPanelRandom" aria-selected="false" tabindex="-1" data-fps-tab="random">Randomowy trening</button>
+    <button type="button" role="tab" id="fpsTabTimer" aria-controls="fpsPanelTimer" aria-selected="false" tabindex="-1" data-fps-tab="timer">Stoper</button>
+  </nav>
+  <section id="fpsPanelConfig" role="tabpanel" aria-labelledby="fpsTabConfig" data-fps-panel="config">
+    <h4>Konfiguracja interwałów</h4>
+    <p class="muted">Runda to jeden obieg wybranych ćwiczeń. Bez wybranej listy ćwiczeń każda runda to jeden interwał pracy. Przerwa następuje między ćwiczeniami i rundami, ale nie po ostatnim ćwiczeniu.</p>
+    <form id="fpsConfigForm" class="fps-form" novalidate>
+      <div class="fps-fields">
+        <label>Czas ćwiczenia <small>minuty lub mm:ss</small><input name="work" type="text" inputmode="numeric" autocomplete="off" aria-label="Czas ćwiczenia, minuty i sekundy" value="03:00" placeholder="03:00" required></label>
+        <label>Czas przerwy <small>minuty lub mm:ss</small><input name="rest" type="text" inputmode="numeric" autocomplete="off" aria-label="Czas przerwy, minuty i sekundy" value="00:30" placeholder="00:30" required></label>
+        <label>Liczba rund <small>1–30</small><input name="rounds" type="number" min="1" max="30" step="1" value="3" required></label>
+      </div>
+      <fieldset class="fps-mode">
+        <legend>Sposób ustawienia czasu</legend>
+        <label><input type="radio" name="mode" value="same" checked> Jednakowy dla wszystkich rund</label>
+        <label><input type="radio" name="mode" value="custom"> Indywidualny dla każdej rundy</label>
+      </fieldset>
+      <div id="fpsCustom" class="fps-custom" hidden>
+        <div class="fps-custom-head"><h5>Czasy poszczególnych rund</h5><button type="button" class="action-button" id="fpsShortenRest">Skracaj przerwę o 10 s</button></div>
+        <div id="fpsCustomRows" class="fps-custom-list"></div>
+      </div>
+      <div class="fps-config-footer">
+        <p class="muted" id="fpsPreview" role="status">3 rundy · 10 min 0 s łącznie</p>
+        <button type="submit" class="action-button primary">Zapisz ustawienia</button>
+      </div>
+      <p class="fps-feedback" id="fpsConfigFeedback" aria-live="polite"></p>
+    </form>
+  </section>
+  <section id="fpsPanelPlan" role="tabpanel" aria-labelledby="fpsTabPlan" data-fps-panel="plan" hidden>
+    <h4>Trening według własnego planu</h4>
+    <p class="muted">Wybierz gotową jednostkę A/B albo ułóż własną listę. Wczytanie wzorca nie zalicza treningu; wyniki zapisujesz dopiero po jego wykonaniu.</p>
+    <!-- WIEDORA-CHANGE: WD-20261031-WIE-110-STARTER-PLANS-01 | TASK: WIE-110 | AUTHOR: ChatGPT / GPT-6 -->
+    <section class="fps-form fps-hint" aria-labelledby="fpsPresetTitle">
+      <h5 id="fpsPresetTitle">Gotowe plany treningowe <span class="fps-small-tag">wersja testowa</span></h5>
+      <div id="fpsQuickPrograms" class="fps-template-quick" role="group" aria-label="Szybki wybór miejsca treningu">
+        <button type="button" class="fps-template-choice" data-fps-preset-quick="fbw-home" aria-pressed="false">
+          <span class="fps-template-icon" aria-hidden="true">⌂</span><span><strong>FBW w domu</strong><small>2 dni A/B · masa ciała, bezpieczna podpora do przyciągania</small></span>
+        </button>
+        <button type="button" class="fps-template-choice" data-fps-preset-quick="fbw-gym" aria-pressed="false">
+          <span class="fps-template-icon" aria-hidden="true">▥</span><span><strong>FBW na siłowni</strong><small>2 dni A/B · hantle, sztanga, ławka i stanowisko przyciągania</small></span>
+        </button>
+      </div>
+      <p class="muted">Najpierw wybierz miejsce i dzień treningu. Pozostałe programy, w tym kalistenika i mobilność, znajdziesz w polu „Program”. Wczytanie jednostki wymaga potwierdzenia nadpisania bieżących ćwiczeń i interwałów.</p>
+      <div class="fps-fields">
+        <label for="fpsPresetProgram">Program<select id="fpsPresetProgram"></select></label>
+        <label for="fpsPresetDay">Jednostka treningowa<select id="fpsPresetDay"></select></label>
+      </div>
+      <!-- WIEDORA-CHANGE: WD-20261031-WIE-117-TRAINING-HISTORY-03 | TASK: WIE-117 | AUTHOR: ChatGPT / GPT-6 -->
+      <p id="fpsPresetDetails" class="muted"></p>
+      <p id="fpsPresetHistory" class="fps-hint" role="status">Historia pilota jest przechowywana wyłącznie na tym urządzeniu.</p>
+      <div class="action-row"><button type="button" class="action-button" id="fpsUndoPreset" disabled>Cofnij ostatni zapis tego programu</button><button type="button" class="action-button" id="fpsExportTraining">Pobierz kopię historii i szkicu (JSON)</button></div>
+      <p class="muted">Historia znajduje się tylko w tej przeglądarce. Na współdzielonym urządzeniu inni użytkownicy mogą ją zobaczyć; nie jest jeszcze przypisana do konta.</p>
+      <!-- WIEDORA-CHANGE: WD-20261031-WIE-115-PLANNING-BASE-01 | TASK: WIE-115 | AUTHOR: ChatGPT / GPT-6 -->
+      <section class="fps-pilot-preview" aria-labelledby="fpsTrainingScheduleHeading">
+        <h6 id="fpsTrainingScheduleHeading">Orientacyjny harmonogram na 4 tygodnie</h6>
+        <p class="muted">Daty są propozycją organizacyjną, nie obowiązkowym zaleceniem. Przypisanie A/B nie oznacza zaliczenia sesji. Dopasuj terminy do regeneracji, sprzętu i samopoczucia.</p>
+        <p id="fpsTrainingRecovery" class="muted" role="status"></p>
+        <ol id="fpsTrainingCalendar" class="fps-workout-list" aria-label="Najbliższe planowane jednostki"></ol>
+      </section>
+      <div class="fps-pilot-preview" aria-labelledby="fpsPresetPreviewHeading">
+        <h6 id="fpsPresetPreviewHeading">Podgląd wybranej jednostki (bez nadpisywania planu)</h6>
+        <p id="fpsPresetDuration" class="muted"></p>
+        <p class="fps-guidance-caption">Podane serie i zakresy powtórzeń są orientacyjną wskazówką treningową, nie pomiarem wykonania. Stoper odlicza interwały niezależnie; dopasuj obciążenie do techniki i regeneracji.</p>
+        <ol id="fpsPresetPreview" class="fps-workout-list"></ol>
+      </div>
+      <div class="action-row"><button type="button" class="action-button primary" id="fpsLoadPreset">Wczytaj wybrany trening A/B</button></div>
+      <p class="fps-feedback" id="fpsPresetFeedback" role="status" aria-live="polite"></p>
+    </section>
+    <p id="fpsSelectedPlan" class="fps-hint"></p>
+    <div class="fps-picker">
+      <label for="fpsExerciseSearch">Wyszukaj ćwiczenie</label>
+      <input id="fpsExerciseSearch" type="search" placeholder="Nazwa ćwiczenia, np. Push-Up">
+      <label for="fpsExerciseSelect">Ćwiczenie</label>
+      <select id="fpsExerciseSelect" aria-label="Ćwiczenie do planu"></select>
+      <button type="button" class="action-button" id="fpsAddExercise">Dodaj do planu</button>
+    </div>
+    <ol id="fpsPlanList" class="fps-workout-list" aria-label="Kolejność ćwiczeń"></ol>
+    <div class="action-row"><button type="button" class="action-button primary" id="fpsLaunchPlan">Uruchom trening według planu</button></div>
+    <p class="fps-feedback" id="fpsPlanFeedback" aria-live="polite"></p>
+  </section>
+  <section id="fpsPanelRandom" role="tabpanel" aria-labelledby="fpsTabRandom" data-fps-panel="random" hidden>
+    <h4>Randomowy trening</h4>
+    <p class="muted">Wylosuj zestaw z katalogu FitPlan. Losowanie nie zastępuje indywidualnego doboru obciążenia i techniki.</p>
+    <div class="fps-kb-shortcut">
+      <div><strong>Trening kettlebell</strong><p class="muted">Dobierz poziom, partię mięśni i zestaw ćwiczeń kettlebell.</p></div>
+      <button type="button" class="action-button primary" id="fpsOpenKettlebell">Wybierz kettlebell →</button>
+    </div>
+    <div class="fps-sport-links">
+      <h5>Wybierz konkretny rodzaj treningu</h5>
+      <p class="muted">Przejdź do partii, celu lub ścieżki progresji, a następnie dobierz poziom i ćwiczenia.</p>
+      <div id="fpsRandomSportLinks" class="fps-sport-grid" aria-label="Rodzaje treningu"></div>
+    </div>
+    <div class="fps-fields fps-random-fields">
+      <label>Partia mięśni<select id="fpsRandomCategory"><option value="">Wszystkie partie</option></select></label>
+      <label>Liczba ćwiczeń<select id="fpsRandomCount"><option value="3">3 ćwiczenia</option><option value="5" selected>5 ćwiczeń</option><option value="8">8 ćwiczeń</option><option value="10">10 ćwiczeń</option></select></label>
+    </div>
+    <div class="action-row"><button type="button" class="action-button" id="fpsGenerateRandom">Losuj ćwiczenia</button><button type="button" class="action-button primary" id="fpsLaunchRandom" disabled>Uruchom wylosowany trening</button></div>
+    <ol id="fpsRandomList" class="fps-workout-list" aria-label="Wylosowane ćwiczenia"></ol>
+    <p class="fps-feedback" id="fpsRandomFeedback" aria-live="polite"></p>
+  </section>
+  <section id="fpsPanelTimer" role="tabpanel" aria-labelledby="fpsTabTimer" data-fps-panel="timer" hidden>
+    <div class="fps-timer-hero">
+      <h4>Stoper interwałowy</h4>
+      <p class="muted" id="fpsSessionName">Trening czasowy</p>
+      <div class="fps-watch">
+        <div class="fps-watch-crown" aria-hidden="true"></div>
+        <div class="fps-watch-face" aria-hidden="true">
+          <div class="fps-watch-track"></div>
+          <div class="fps-watch-progress" id="fpsWatchProgress"></div>
+          <div class="fps-watch-ticks" id="fpsWatchTicks"></div>
+          <span class="fps-watch-mark fps-watch-mark-top">0</span>
+          <span class="fps-watch-mark fps-watch-mark-right">15</span>
+          <span class="fps-watch-mark fps-watch-mark-bottom">30</span>
+          <span class="fps-watch-mark fps-watch-mark-left">45</span>
+          <div class="fps-watch-hand" id="fpsWatchHand"></div>
+          <span class="fps-watch-pin"></span>
+        </div>
+        <div class="fps-watch-screen"><span id="fpsPhase">GOTOWY</span><strong id="fpsRemaining" role="timer" aria-live="off">03:00</strong><small id="fpsRound">Runda 1 / 3</small></div>
+      </div>
+      <div class="fps-controls" role="group" aria-label="Sterowanie stoperem">
+        <button type="button" class="action-button primary" id="fpsTimerStart">Start</button>
+        <button type="button" class="action-button" id="fpsTimerPause" disabled>Pauza</button>
+        <button type="button" class="action-button" id="fpsTimerSkip" disabled>Następny etap</button>
+        <button type="button" class="action-button" id="fpsTimerReset">Reset</button>
+        <button type="button" class="action-button" id="fpsTimerLock">Zablokuj dotyk</button>
+      </div>
+      <p id="fpsTimerStatus" class="fps-feedback" role="status" aria-live="polite">Ustaw czas i naciśnij Start.</p>
+      <!-- WIEDORA-CHANGE: WD-20261031-WIE-117-TRAINING-HISTORY-03 | TASK: WIE-117 | AUTHOR: ChatGPT / GPT-6 -->
+      <!-- WIEDORA-CHANGE: WD-20261031-WIE-185-SETS-ENGINE-07 | TASK: WIE-185 | AUTHOR: ChatGPT / GPT-6 -->
+      <section class="fps-pilot-finish" aria-labelledby="fpsSetHeading">
+        <h5 id="fpsSetHeading">Wykonane serie i ostatni wynik</h5>
+        <p class="muted">Zapisuj wyłącznie rzeczywiście wykonane powtórzenia. 0 kg oznacza masę własnego ciała, RPE/RIR są opcjonalne. Przy ćwiczeniach wyłącznie na czas lub oddech pomiń liczbę powtórzeń.</p>
+        <label for="fpsSetExercise">Ćwiczenie z aktualnej jednostki <select id="fpsSetExercise"></select></label>
+        <p id="fpsLastSet" class="muted">Wybierz ćwiczenie, by zobaczyć ostatnią serię.</p>
+        <button type="button" class="action-button" id="fpsUseLastSet" disabled>Wstaw ostatni wynik do formularza</button>
+        <div class="fps-set-fields">
+          <label for="fpsSetReps">Powtórzenia <input id="fpsSetReps" type="number" min="1" max="300" step="1" inputmode="numeric" placeholder="np. 8"></label>
+          <label for="fpsSetWeight">Ciężar (kg) <input id="fpsSetWeight" type="number" min="0" max="1000" step="0.01" inputmode="decimal" value="0"></label>
+          <label for="fpsSetRpe">RPE <select id="fpsSetRpe"><option value="">Bez oceny</option><option value="1">1</option><option value="1.5">1,5</option><option value="2">2</option><option value="2.5">2,5</option><option value="3">3</option><option value="3.5">3,5</option><option value="4">4</option><option value="4.5">4,5</option><option value="5">5</option><option value="5.5">5,5</option><option value="6">6</option><option value="6.5">6,5</option><option value="7">7</option><option value="7.5">7,5</option><option value="8">8</option><option value="8.5">8,5</option><option value="9">9</option><option value="9.5">9,5</option><option value="10">10</option></select></label>
+          <label for="fpsSetRir">RIR <select id="fpsSetRir"><option value="">Bez oceny</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></label>
+        </div>
+        <div class="action-row"><button type="button" class="action-button" id="fpsAddSet" disabled>Zapisz wykonaną serię</button><button type="button" class="action-button" id="fpsUndoSet" disabled>Cofnij ostatnią serię</button><button type="button" class="action-button" id="fpsClearSetDraft" disabled>Wyczyść szkic serii</button></div>
+        <ol id="fpsSetList" class="fps-workout-list"></ol>
+        <p id="fpsSetFeedback" class="fps-feedback" role="status" aria-live="polite"></p>
+      </section>
+      <section class="fps-pilot-finish" aria-labelledby="fpsPilotFinishHeading">
+        <h5 id="fpsPilotFinishHeading">Historia gotowego programu</h5>
+        <p class="muted">Przejście stopera do końca nie oznacza automatycznie wykonania ćwiczeń. Potwierdź tylko rzeczywiście ukończony program. Historia zostaje na tym urządzeniu, bez synchronizacji konta.</p>
+        <label for="fpsPilotRpe">Odczuwalna trudność sesji RPE (opcjonalnie)
+          <select id="fpsPilotRpe"><option value="">Nie podaję</option><option value="5">5 — lekko</option><option value="6">6</option><option value="7">7 — umiarkowanie</option><option value="8">8 — ciężko</option><option value="9">9</option><option value="10">10 — maksymalnie ciężko</option></select>
+        </label>
+        <button type="button" id="fpsCompletePreset" class="action-button" disabled>Zapisz faktycznie ukończony program</button>
+        <p id="fpsCompleteFeedback" class="fps-feedback" role="status" aria-live="polite"></p>
+      </section>
+    </div>
+    <div class="fps-timer-settings">
+      <h4>Ustawienia stopera</h4>
+      <p class="muted" id="fpsTimerSummary"></p>
+      <fieldset class="fps-timer-options">
+        <legend>Ekran i sygnały</legend>
+        <label><input type="checkbox" id="fpsKeepAwake" checked> Nie wygaszaj ekranu podczas treningu</label>
+        <label><input type="checkbox" id="fpsSound" checked> Dźwięk odliczania i końca etapu</label>
+        <label><input type="checkbox" id="fpsVibration" checked> Wibracje odliczania i końca etapu</label>
+        <button type="button" class="action-button" id="fpsTestSound">Przetestuj dźwięk</button>
+      </fieldset>
+      <p id="fpsWakeStatus" class="muted" role="status"></p>
+      <p class="muted fps-background-hint">Blokada dotyku poniżej zachowuje działanie stopera. Systemowe zablokowanie urządzenia lub ukrycie strony może wstrzymać dźwięki i wibracje. Po powrocie czas zostanie przeliczony.</p>
+      <button type="button" class="action-button" id="fpsEditSettings">Zmień czasy i rundy</button>
+    </div>
+  </section>
+  <div id="fpsTouchLock" class="fps-touch-lock" role="dialog" aria-modal="true" aria-label="Blokada dotyku stopera" data-portal-touch-lock hidden>
+    <span id="fpsLockedPhase">GOTOWY</span>
+    <strong id="fpsLockedTime" role="timer" aria-live="off">03:00</strong>
+    <p>Dotyk zablokowany. Stoper działa dalej.</p>
+    <button type="button" id="fpsUnlock" class="action-button">Przytrzymaj 1 sekundę, aby odblokować</button>
+    <small>Na klawiaturze możesz użyć Escape.</small>
+  </div>
+</section>

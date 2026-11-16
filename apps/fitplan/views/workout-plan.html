@@ -1,0 +1,276 @@
+<section class="info-card" data-fitplan-view="plan-treningowy" aria-labelledby="fpkTitle">
+  <h3 id="fpkTitle">Plan treningowy</h3>
+  <p class="muted">Nie musisz znać nazw systemów treningowych. Wybierz cel i miejsce ćwiczeń, a pokażemy Ci od czego zacząć. Każdą metodę możesz też przejrzeć samodzielnie.</p>
+  <div id="fpkChooser">
+  <!-- WIEDORA-CHANGE: WD-20261101-FITPLAN-SYSTEMS-UX-01 | TASK: FitPlan systems UX | AUTHOR: ChatGPT / GPT-6 -->
+  <section class="fpk-guide" id="fpkGuide" aria-labelledby="fpkGuideTitle">
+    <div class="fpk-guide-heading"><span class="fpk-guide-eyebrow">ZACZNIJ TUTAJ</span><h4 id="fpkGuideTitle">Jaki trening będzie dla Ciebie odpowiedni?</h4>
+      <p class="muted">Trzy krótkie wybory. Nie zapisujemy odpowiedzi ani nie zmieniamy Twojej historii treningów.</p></div>
+    <div class="fpk-guide-fields">
+      <label for="fpkGuideGoal">1. Co chcesz osiągnąć?
+        <select id="fpkGuideGoal"><option value="general">Poprawić ogólną sprawność</option><option value="strength">Zwiększyć siłę</option><option value="muscle">Rozbudować mięśnie</option><option value="endurance">Poprawić kondycję</option><option value="skills">Nauczyć się nowych ćwiczeń</option><option value="mobility">Poprawić mobilność i zakres ruchu</option><option value="core">Wzmocnić brzuch i stabilizację</option><option value="pushups">Zrobić więcej pompek</option></select>
+      </label>
+      <label for="fpkGuidePlace">2. Gdzie będziesz ćwiczyć?
+        <select id="fpkGuidePlace"><option value="any">W domu albo na siłowni</option><option value="home">Głównie w domu</option><option value="gym">Na siłowni</option></select>
+      </label>
+      <label for="fpkGuideExperience">3. Jakie masz doświadczenie?
+        <select id="fpkGuideExperience"><option value="beginner">Zaczynam / wracam po przerwie</option><option value="intermediate">Ćwiczę już regularnie</option><option value="advanced">Mam duże doświadczenie</option></select>
+      </label>
+    </div>
+    <div class="fpk-guide-recommendations">
+      <div class="fpk-guide-result-heading"><div><h5>Proponowane metody treningu</h5><p class="muted" id="fpkGuideCount" role="status" aria-live="polite"></p></div><button type="button" id="fpkGuideReset" class="action-button">Wyczyść wybór</button></div>
+      <div class="fpk-guide-results" id="fpkGuideResults" aria-label="Proponowane rodzaje treningu"></div>
+      <p class="fpk-guide-disclaimer">To podpowiedź na podstawie podanych preferencji, nie indywidualna ocena sprawności ani zalecenie medyczne. Przy bólu lub ograniczeniach zdrowotnych dostosuj aktywność do swoich możliwości.</p>
+    </div>
+  </section>
+  <details class="fpk-methods" id="fpkAllMethods"><summary>Porównaj wszystkie 11 metod treningowych <span>Opisy i zastosowanie każdej metody</span></summary>
+  <div class="fpk-plan-grid" id="fpkPlans" aria-label="Rodzaje planów treningowych">
+    <button type="button" class="action-button fpk-plan" id="fpkKettlebell" data-fpk-plan="kettlebell"><span aria-hidden="true">●</span><strong>Kettlebell</strong><small>Siła, kondycja i praca całego ciała</small></button>
+    <button type="button" class="action-button fpk-plan" data-fpk-plan="crossfit"><span aria-hidden="true">⚡</span><strong>CrossFit</strong><small>Ruchy funkcjonalne i trening mieszany</small></button>
+    <button type="button" class="action-button fpk-plan" data-fpk-plan="kalistenika"><span aria-hidden="true">◆</span><strong>Kalistenika</strong><small>Progresje z masą własnego ciała</small></button>
+    <button type="button" class="action-button fpk-plan" data-fpk-plan="split"><span aria-hidden="true">▦</span><strong>Split</strong><small>Partie mięśniowe w oddzielnych dniach</small></button>
+    <button type="button" class="action-button fpk-plan" data-fpk-plan="fbw"><span aria-hidden="true">◎</span><strong>FBW</strong><small>Dwa gotowe programy A/B: dom i siłownia</small></button>
+    <button type="button" class="action-button fpk-plan" data-fpk-plan="push-pull"><span aria-hidden="true">↔</span><strong>Push–pull</strong><small>Dni pchania i przyciągania</small></button>
+    <button type="button" class="action-button fpk-plan" data-fpk-plan="sztuki-walki"><span aria-hidden="true">◈</span><strong>Sztuki walki</strong><small>Technika, szybkość i przygotowanie motoryczne</small></button>
+    <button type="button" class="action-button fpk-plan" data-fpk-plan="100-pompek"><span aria-hidden="true">100</span><strong>100 pompek i więcej</strong><small>Progresja liczby powtórzeń</small></button>
+    <button type="button" class="action-button fpk-plan" data-fpk-plan="rozciaganie"><span aria-hidden="true">↗</span><strong>Rozciąganie</strong><small>Mobilność i zakres ruchu</small></button>
+    <button type="button" class="action-button fpk-plan" data-fpk-plan="joga"><span aria-hidden="true">◌</span><strong>Joga</strong><small>Oddech, równowaga i pozycje</small></button>
+    <button type="button" class="action-button fpk-plan" data-fpk-plan="brzuch"><span aria-hidden="true">◎</span><strong>Brzuch</strong><small>Stabilizacja i mięśnie tułowia</small></button>
+  </div>
+  </details>
+  <details class="fpk-glossary"><summary>Nie znasz pojęć FBW, split, push–pull i obwód?</summary>
+    <dl><dt>FBW (Full Body Workout)</dt><dd>Podczas jednej sesji ćwiczysz całe ciało.</dd>
+    <dt>Split</dt><dd>Na różnych sesjach skupiasz się na innych partiach mięśni.</dd>
+    <dt>Push–pull</dt><dd>Podział na ruchy pchania i przyciągania.</dd>
+    <dt>Obwód</dt><dd>Wykonujesz kolejno kilka ćwiczeń i ewentualnie powtarzasz całą rundę.</dd>
+    <dt>Seria i powtórzenie</dt><dd>Powtórzenie to pojedyncze wykonanie ruchu, a seria to grupa powtórzeń przed przerwą.</dd></dl>
+  </details>
+  <div class="fpk-kbc-quick"><button id="fpkKbCircuitLauncher" type="button" class="action-button fpk-kbc-quick-btn">Gotowy program kettlebell — całe ciało <small>Trzy poziomy, dobór celu i czasu. To gotowy trening obwodowy, a nie kolejna metoda obok 11 powyżej.</small></button></div>
+  <p id="fpkSelected" class="muted" role="status" aria-live="polite"></p>
+  </div>
+  <section id="fpkKettlebellFlow" class="fpk-kettlebell" aria-label="Wybór ścieżki treningowej" hidden>
+    <div class="fpk-kb-head">
+      <button type="button" class="action-button" id="fpkKbBackToLevel">← Zmień rodzaj treningu</button>
+      <p class="muted" id="fpkKbLevel"></p>
+    </div>
+    <div id="fpkKbGoals">
+      <h4 id="fpkGoalHeading">Co chcesz trenować?</h4>
+      <p class="muted" id="fpkGoalInfo">Wybierz partię lub cel treningowy.</p>
+      <div id="fpkKbGoalGrid" class="fpk-kb-goal-grid" aria-label="Cele treningowe"></div>
+      <button type="button" id="fpkKbcWithinKettlebell" class="action-button" hidden>Uruchom program obwodowy całego ciała · 3 poziomy</button>
+      <section id="fpkSkills" class="fpk-skill-catalog" hidden></section>
+    </div>
+    <div id="fpkSkillDetails" class="fpk-skill-details" hidden></div>
+    <div id="fpkKbDiscover" hidden>
+      <button type="button" class="action-button" id="fpkKbBrowseBack">← Wróć do partii</button>
+      <h4 id="fpkKbBrowseTitle">Ćwiczenia</h4>
+      <p id="fpkKbBrowseCount" class="muted"></p>
+      <p class="muted">Najpierw zobacz ćwiczenia główne i pomocnicze, następnie wybierz poziom trudności.</p>
+      <div class="fpk-kb-roles">
+        <section><h5>Główne dla tej partii</h5><div id="fpkKbPrimary" class="fpk-kb-role-items"></div></section>
+        <section><h5>Angażujące partię pomocniczo</h5><div id="fpkKbSecondary" class="fpk-kb-role-items"></div></section>
+      </div>
+      <p class="muted">Procenty to szacunkowy podział akcentu treningowego, nie rzeczywisty rozkład siły ani wynik EMG.</p>
+      <div id="fpkKbLevels" class="fpk-levels">
+        <h4>Wybierz poziom, aby ułożyć zestaw</h4>
+        <div class="action-row" role="group" aria-label="Poziom ćwiczeń kettlebell">
+          <button type="button" class="action-button" data-fpk-kb-level="poczatkujacy">Początkujący</button>
+          <button type="button" class="action-button" data-fpk-kb-level="sredniozaawansowany">Średniozaawansowany</button>
+          <button type="button" class="action-button" data-fpk-kb-level="zaawansowany">Zaawansowany</button>
+          <button type="button" class="action-button" data-fpk-kb-level="zawodowiec">Zawodowiec</button>
+        </div>
+      </div>
+    </div>
+    <!-- WIEDORA-CHANGE: WD-20261031-WIE-110-PUSHUP100-01 | TASK: WIE-110/WIE-115 | AUTHOR: ChatGPT / GPT-6 -->
+    <section id="fpkPushup100" class="fpk-pu" aria-labelledby="fpkPuTitle" hidden>
+      <button type="button" id="fpkPuBack" class="action-button">← Wróć do wyboru celu</button>
+      <div class="fpk-pu-hero">
+        <div class="fpk-pu-ring" id="fpkPuRing" role="img" aria-label="Postęp do celu 100 pompek">
+          <div><strong id="fpkPuMaxVisual">0</strong><small>ze 100</small></div>
+        </div>
+        <div class="fpk-pu-hero-text">
+          <p class="fpk-pu-eyebrow">PROGRAM SPECJALNY · 8-TYGODNIOWY BLOK Z MOŻLIWOŚCIĄ PRZEDŁUŻENIA</p>
+          <h4 id="fpkPuTitle" tabindex="-1">100 pompek w jednej serii</h4>
+          <p>Trzy poziomy wyznaczane na podstawie maksymalnej liczby <strong>pełnych, poprawnych technicznie pompek</strong> wykonanych bez przerwy. Częstotliwość zależy od wybranego cyklu 5/7/10 dni, z odpoczynkiem między cięższymi sesjami.</p>
+          <p class="muted">Osiem tygodni to cykl planowania, nie obietnica wykonania 100 pompek. Przy bólu przerwij. Jeżeli po cyklu nie osiągniesz celu, możesz ponownie wykonać test i powtórzyć cykl.</p>
+        </div>
+      </div>
+      <div class="fpk-pu-technique">
+        <div><strong>Technika przed liczeniem powtórzeń</strong><p class="muted">Obejrzyj istniejącą w FitPlan animację Push-Up. Suwak pozwala zatrzymać ruch w wybranej fazie.</p></div>
+        <button type="button" id="fpkPuMotion" class="action-button">Pokaż technikę pompki</button>
+      </div>
+      <div class="fpk-pu-level-grid" aria-label="Trzy poziomy programu">
+        <div><strong>I · Początek</strong><span>0–10 pompek</span></div>
+        <div><strong>II · Rozwój</strong><span>11–30 pompek</span></div>
+        <div><strong>III · Wytrzymałość</strong><span>31+ pompek do obecnego celu</span></div>
+      </div>
+      <form id="fpkPuTestForm" class="fpk-pu-test">
+        <div>
+          <label for="fpkPuTest">Twój test: maksymalna liczba pompek w jednej serii</label>
+          <p class="muted">Utrzymaj linię ciała, opuszczaj tułów w kontrolowanym zakresie i licz tylko poprawne powtórzenia. Odpocznij po teście przed pierwszą sesją.</p>
+          <input id="fpkPuTest" type="number" inputmode="numeric" min="0" max="1000" step="1" placeholder="np. 12" required>
+        </div>
+        <button class="action-button primary" id="fpkPuAssess" type="submit">Oblicz poziom i zapisz program</button>
+      </form>
+      <!-- WIEDORA-CHANGE: WD-20261031-WIE-115-LOAD-CYCLE-02 | TASK: WIE-115 | AUTHOR: ChatGPT / GPT-6 -->
+      <section class="fpk-pu-settings" aria-labelledby="fpkPuSettingsTitle">
+        <h5 id="fpkPuSettingsTitle">Czas i cykl treningowy</h5>
+        <p class="muted">Wybierz maksymalny czas jednej sesji i długość cyklu. 40/60/80/100 min nie oznacza dodatkowych pompek: nadwyżkę pozostaw na odpoczynek, mobilność albo inne partie mięśniowe.</p>
+        <div class="fpk-pu-config">
+          <label for="fpkPuMinutes">Długość sesji
+            <select id="fpkPuMinutes"><option value="20">20 min</option><option value="40">40 min</option><option value="60">60 min</option><option value="80">80 min</option><option value="100">100 min</option></select>
+          </label>
+          <label for="fpkPuCycleDays">Cykl planowania
+            <select id="fpkPuCycleDays"><option value="5">5 dni · 2 jednostki</option><option value="7" selected>7 dni · 3 jednostki</option><option value="10">10 dni · 4 jednostki</option></select>
+          </label>
+          <button type="button" class="action-button" id="fpkPuConfigSave">Zapisz ustawienia</button>
+        </div>
+        <p class="muted" id="fpkPuBudgetInfo" role="status"></p>
+        <div id="fpkPuCyclePreview" class="fpk-pu-cycle" aria-label="Dni treningu i regeneracji"></div>
+      </section>
+      <p id="fpkPuFeedback" class="fps-feedback" role="status" aria-live="polite"></p>
+      <div id="fpkPuWorkout" hidden>
+        <div class="fpk-pu-summary">
+          <div><span>Poziom</span><strong id="fpkPuLevel"></strong></div>
+          <div><span>Najlepszy test</span><strong id="fpkPuBest"></strong></div>
+          <div><span>Ukończone sesje</span><strong id="fpkPuCompleted"></strong></div>
+          <div><span>Wykonane powtórzenia</span><strong id="fpkPuVolume"></strong></div>
+          <!-- WIEDORA-CHANGE: WD-20261101-WIE-110-KB-FBW-01 | TASK: WIE-110 | AUTHOR: ChatGPT / GPT-6 -->
+          <div><span>Powtórzenia w tym tygodniu</span><strong id="fpkPuWeekReps">0</strong></div>
+          <div><span>Trend względem celu</span><strong id="fpkPuTrend">Brak porównania</strong></div>
+        </div>
+        <p id="fpkPuAdvice" class="muted"></p>
+        <p id="fpkPuPhase" class="muted" role="status"></p>
+        <div class="fpk-pu-recovery">
+          <label for="fpkPuFatigue">Samopoczucie przed treningiem
+            <select id="fpkPuFatigue"><option value="normal">Czuję się wypoczęta/y</option><option value="tired">Zmęczenie / brak regeneracji</option><option value="pain">Ból albo niepokojące objawy</option></select>
+          </label>
+          <p id="fpkPuRecoveryInfo" class="muted" role="status"></p>
+        </div>
+        <div id="fpkPuGoalControls" class="fpk-pu-config" hidden>
+          <div><strong id="fpkPuCurrentGoal">Cel: 100</strong><p class="muted">Osiągnięto obecny cel w teście? Ustaw następny, maksymalnie +100 jednorazowo.</p></div>
+          <label for="fpkPuGoalIncrease">Podwyższ cel o liczbę pompek <input id="fpkPuGoalIncrease" type="number" min="1" max="100" step="1" inputmode="numeric" value="20"></label>
+          <button type="button" id="fpkPuRaiseGoal" class="action-button">Wyznacz kolejny cel</button>
+        </div>
+        <div id="fpkPuExtensionControls" class="fpk-pu-config" hidden>
+          <div><strong>Cel jeszcze nieosiągnięty</strong><p class="muted">Po bloku treningowym możesz odpocząć 3–7 dni, wykonać nowy test i dodać kolejne 4 tygodnie bez usuwania historii.</p></div>
+          <button type="button" id="fpkPuExtend" class="action-button">Przedłuż program o 4 tygodnie</button>
+        </div>
+        <div class="fpk-pu-session-head">
+          <div><h5 id="fpkPuDayTitle">Tydzień 1 · Trening 1</h5><p id="fpkPuRest" class="muted"></p></div>
+          <div class="fpk-pu-total"><strong id="fpkPuTotal">0</strong><small>planowanych powtórzeń</small></div>
+        </div>
+        <p class="muted" id="fpkPuRetestHint">Po tygodniach 2, 4, 6 i 8 wykonaj kolejny test w oddzielnym dniu po regeneracji.</p>
+        <details class="fpk-pu-roadmap">
+          <summary id="fpkPuRoadmapLabel">Zobacz rozpiskę całego bloku treningowego</summary>
+          <div class="fpk-pu-table-scroll">
+            <table class="fpk-pu-table" aria-label="Plan wszystkich 24 sesji">
+              <thead><tr><th>Tydzień</th><th>Trening 1</th><th>Trening 2</th><th>Trening 3</th></tr></thead>
+              <tbody id="fpkPuRoadmap"></tbody>
+            </table>
+          </div>
+          <p class="muted">Rozpiska pokazuje jednostki treningowe, nie dni kalendarzowe. Cykl 5/7/10 dni określa odstępy między jednostkami. Po ponownym teście przyszłe cele mogą się zmienić.</p>
+        </details>
+        <form id="fpkPuSetsForm">
+          <ol id="fpkPuSetList" class="fpk-pu-sets"></ol>
+          <button class="action-button primary" id="fpkPuSave" type="submit">Zapisz rzeczywiście wykonane serie</button>
+        </form>
+        <p class="muted">Jeśli nie osiągniesz celu w którejś serii, możesz zapisać wynik, ale ten sam trening pozostanie do ponowienia. Nie ćwicz ponownie tego samego dnia tylko po to, aby od razu nadrobić serie.</p>
+        <div class="action-row"><button type="button" id="fpkPuTimer" class="action-button">Przejdź do stopera</button></div>
+        <p class="muted">Stoper jest pomocniczy i działa niezależnie. Nie mierzy automatycznie wykonanych pompek ani nie zalicza tego programu.</p>
+        <div class="fpk-pu-history"><h5>Ostatnie sesje</h5><ol id="fpkPuHistory"></ol></div>
+      </div>
+      <p class="muted">Wyniki pozostają na tym urządzeniu, nie są przypisane do konta. Na wspólnej przeglądarce inne osoby mogą je zobaczyć. Nie kopiujemy cudzych planów ani grafik.</p>
+    </section>
+    <!-- WIEDORA-CHANGE: WD-20261101-WIE-110-KB-FBW-01 | TASK: WIE-110/WIE-115 | AUTHOR: ChatGPT / GPT-6 -->
+    <section id="fpkKbcPanel" class="fpk-kbc" aria-labelledby="fpkKbcHeading" hidden>
+      <button type="button" id="fpkKbcBack" class="action-button">← Wróć do treningów</button>
+      <div class="fpk-kbc-hero">
+        <div><span class="fpk-kbc-eyebrow">PROGRAM KETTLEBELL · PEŁNE CIAŁO</span>
+          <h4 id="fpkKbcHeading" tabindex="-1">Kettlebell Total Body Circuit</h4>
+          <p>Obwodowy trening całego ciała: przysiad, zawias biodrowy, przyciąganie, wypychanie i stabilizacja. Dobierz czas oraz cel, a po każdym treningu wpisz <strong>rzeczywiste</strong> wyniki.</p>
+          <p class="muted">Wybierz tylko opanowane ruchy. Wersja początkująca nie wykorzystuje dynamicznych swingów ani cleanów. Technika ma pierwszeństwo przed liczbą powtórzeń i kilogramami.</p>
+        </div><div class="fpk-kbc-emblem" aria-hidden="true"><span>KB</span><small>360°</small></div>
+      </div>
+      <!-- WIEDORA-CHANGE: WD-20261101-WIE-110-KB-UX-FIX-02 | TASK: WIE-110 | AUTHOR: ChatGPT / GPT-6 -->
+      <ol class="fpk-kbc-steps" aria-label="Trzy kroki programu">
+        <li><strong>01 · Ustaw cel</strong><span>Wybierz poziom, czas i rytm</span></li>
+        <li><strong>02 · Trenuj</strong><span>Skorzystaj z planu i stopera</span></li>
+        <li><strong>03 · Zapisz wynik</strong><span>Wpisz rzeczywiste serie</span></li>
+      </ol>
+      <form id="fpkKbcSetup" class="fpk-kbc-config">
+        <h5>Ustaw swój plan</h5>
+        <div class="fpk-kbc-config-grid">
+          <label>Poziom
+            <select id="fpkKbcLevel"><option value="beginner">I · Fundamenty</option><option value="intermediate">II · Rozwój</option><option value="advanced">III · Zaawansowany</option></select>
+          </label>
+          <label>Cel treningowy
+            <select id="fpkKbcGoal">
+              <option value="general">Sprawność ogólna</option><option value="muscle">Rozbudowa mięśni</option>
+              <option value="recomposition">Rekompozycja sylwetki</option><option value="reduction">Redukcja z ochroną mięśni</option><option value="strength">Siła całego ciała</option>
+              <option value="technique">Technika i kontrola ruchu</option><option value="conditioning">Kondycja i wytrzymałość</option>
+            </select>
+          </label>
+          <label>Budżet czasu jednej sesji
+            <select id="fpkKbcMinutes"><option value="20">20 minut</option><option value="40" selected>40 minut</option><option value="60">60 minut</option><option value="80">80 minut</option><option value="100">100 minut</option></select>
+          </label>
+          <label>Długość cyklu
+            <select id="fpkKbcCycle"><option value="5">5 dni</option><option value="7" selected>7 dni</option><option value="10">10 dni</option></select>
+          </label>
+          <label>Liczba sesji w cyklu
+            <select id="fpkKbcFrequency"><option value="1">1 sesja</option><option value="2">2 sesje</option><option value="3" selected>3 sesje</option></select>
+          </label>
+        </div>
+        <p id="fpkKbcGoalInfo" class="muted"></p>
+        <button type="submit" class="action-button primary" id="fpkKbcStart">Zapisz i ułóż trening</button>
+        <p class="muted">Zmiana poziomu lub celu dotyczy przyszłych sesji. Nie zmieniamy ani nie usuwamy historii. Dla redukcji tkanki tłuszczowej liczy się także odżywianie; sam wybór celu nie gwarantuje utraty masy.</p>
+      </form>
+      <p id="fpkKbcFeedback" class="fps-feedback" role="status" aria-live="polite"></p>
+      <div id="fpkKbcActive" hidden>
+        <div class="fpk-kbc-stats" aria-label="Podsumowanie programu">
+          <div><span>Jednostki treningowe</span><strong id="fpkKbcSessions">0</strong></div>
+          <div><span>Powtórzenia w cyklu</span><strong id="fpkKbcCycleReps">0</strong></div>
+          <div><span>Powtórzenia łącznie</span><strong id="fpkKbcAllReps">0</strong></div>
+          <div><span>Objętość (kg × powt.)</span><strong id="fpkKbcVolume">0</strong></div>
+        </div>
+        <p id="fpkKbcTrend" class="fpk-kbc-trend" role="status"></p>
+        <div class="fpk-kbc-session-head"><div><h5 id="fpkKbcSessionTitle"></h5><p id="fpkKbcTime" class="muted"></p></div>
+          <button id="fpkKbcTimer" class="action-button" type="button">Otwórz niezależny stoper</button>
+        </div>
+        <p id="fpkKbcRecovery" class="muted" role="status"></p>
+        <form id="fpkKbcResults">
+          <p class="fpk-kbc-filled" id="fpkKbcFilled" role="status" aria-live="polite">Wpisano 0 serii.</p>
+          <div class="fpk-kbc-log-scroll">
+            <table class="fpk-kbc-log" aria-label="Wyniki ćwiczeń w obwodach">
+              <thead><tr><th>Ćwiczenie i runda</th><th>Cel</th><th>Faktycznie wykonano</th><th>Kettlebell (kg)</th><th>RIR</th><th>Technika</th></tr></thead>
+              <tbody id="fpkKbcRows"></tbody>
+            </table>
+          </div>
+          <p class="muted">Przy każdym ćwiczeniu możesz świadomie wstawić poprzedni ciężar. Nowe wpisy są tymczasowym szkicem do czasu zapisu; przeładowanie strony je usuwa. Pole RIR i ocena techniki są opcjonalne.</p>
+          <p class="muted">Liczba powtórzeń może być większa lub mniejsza od celu. Wpisz faktyczną liczbę oraz użyty ciężar w każdej serii. RIR to orientacyjna liczba poprawnych powtórzeń, które pozostałyby w zapasie. Dla ruchów jednostronnych licz powtórzenia łącznie, lewa + prawa.</p>
+          <button id="fpkKbcSave" type="submit" class="action-button primary">Potwierdź i zapisz wykonany trening</button>
+        </form>
+        <section class="fpk-kbc-history" aria-labelledby="fpkKbcHistoryTitle"><h5 id="fpkKbcHistoryTitle">Ostatnie jednostki</h5><ol id="fpkKbcHistory"></ol></section>
+        <p class="muted">Historia pozostaje lokalnie w tym profilu przeglądarki. Wyniki nie synchronizują się jeszcze z kontem. Progres i regres to opis porównywalnych wpisów, nie pomiar zmian masy mięśniowej ani spalania tłuszczu.</p>
+      </div>
+    </section>
+    <div id="fpkKbEditor" hidden>
+      <button type="button" class="action-button" id="fpkKbBackToGoals">← Wróć do wyboru partii</button>
+      <h4 id="fpkKbGoalTitle"></h4>
+      <p class="muted" id="fpkKbGoalIntro"></p>
+      <label class="fpk-kb-search-label" for="fpkKbSearch">Wyszukaj ćwiczenie</label>
+      <input id="fpkKbSearch" type="search" placeholder="Nazwa ćwiczenia">
+      <div class="fpk-kb-edit-grid">
+        <section aria-label="Dostępne ćwiczenia"><h5>Dostępne ćwiczenia</h5><div id="fpkKbAvailable" class="fpk-kb-available"></div></section>
+        <section aria-label="Twój zestaw"><h5>Twój zestaw <span id="fpkKbCount"></span></h5><ol id="fpkKbSelectedList" class="fpk-kb-sequence"></ol></section>
+      </div>
+      <p class="muted">Dobierz obciążenie do techniki. Czas pracy, przerwy i rundy ustawiasz w Start → Konfiguracja.</p>
+      <div class="action-row">
+        <button type="button" class="action-button" id="fpkKbReset">Przywróć propozycję</button>
+        <button type="button" class="action-button" id="fpkKbSave">Zapisz zestaw</button>
+        <button type="button" class="action-button primary" id="fpkKbLaunch">Przejdź do stopera</button>
+      </div>
+      <p id="fpkKbFeedback" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+</section>
