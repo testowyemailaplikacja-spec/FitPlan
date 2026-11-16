@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <base href="/apps/fitplan/">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <title>FitPlan — planer treningowy</title>
+  <meta name="description" content="Plan treningowy, atlas mięśni, ćwiczenia, kalendarz, dieta i kontrola postępów.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://constant-app.netlify.app/apps/fitplan/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FitPlan — planer treningowy">
+  <meta property="og:description" content="Plan treningowy, atlas mięśni, ćwiczenia, kalendarz, dieta i kontrola postępów.">
+  <meta property="og:url" content="https://constant-app.netlify.app/apps/fitplan/">
+  <style>
+    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0b1220}
+    #appFrame{display:block;width:100%;height:100%;border:0;background:#fff}
+  </style>
+  <link rel="stylesheet" href="../shared/portal-nav.css?v=20261024-bugfix-1">
+  <link rel="stylesheet" href="../shared/avatar-presets.css?v=20261024-bugfix-1">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="../shared/offline-control.css">
+  <link rel="stylesheet" href="./styles/portal-layout.css?v=20261007-mobile-dock-2">
+</head>
+<body class="fitplan-app-shell">
+<iframe id="appFrame" src="./legacy.html?v=20261027-progress-1" title="FitPlan — planer treningowy" allow="fullscreen" loading="eager"></iframe>
+  <script src="/assets/vendor/supabase-2.117.2.js"></script>
+  <script src="/js/supabase-client.js"></script>
+<!-- WIEDORA-CHANGE: WD-20261101-WIE-155-PREFERENCES-CAS-03 | TASK: WIE-155 | AUTHOR: Codex / GPT-6 (pełna wersja nieustalona) -->
+<script src="/js/platform-data.js?v=20261101-preferences-cas-3"></script>
+<!-- WIEDORA-CHANGE: WD-20261030-WIE-157-REDACTION | TASK: WIE-157 | AUTHOR: Codex / GPT-6 -->
+<!-- WIEDORA-CHANGE: WD-20261031-WIE-157-ERROR-PATH-ROOT-01 | TASK: WIE-157 | AUTHOR: ChatGPT / GPT-6 -->
+<script src="/js/error-monitor.js?v=20261031-errorpath-1"></script>
+<script src="/js/user-presence.js"></script>
+<script src="../shared/content-protection.js?v=20261008-hidden-watermark"></script>
+  <script src="/js/progress-storage.js?v=20261024-bugfix-1"></script>
+  <script src="/js/avatar-presets.js?v=20261024-bugfix-1"></script>
+  <script src="/js/supabase-auth.js?v=20261024-bugfix-1"></script>
+  <script src="/js/fitplan-account-media.js?v=20261027-progress-1"></script>
+  <script src="./progress.js?v=20261006-stage13"></script>
+  <script src="./runtime-loader.js?v=20261006-stage13"></script>
+  <script src="./app-controller.js?v=20261006-stage15"></script>
+  <script src="./view-loader.js?v=20261018-fixes-1"></script>
+  <script src="./lazy-loader.js?v=20261005-stage12"></script>
+  <script src="./modules/registry.js?v=20261018-fixes-1"></script>
+  <script src="./modules/calendar.js?v=20261018-season-3"></script>
+  <script src="./modules/exercise-list.js?v=20261023-muscle-roles-1"></script>
+  <!-- WIEDORA-CHANGE: WD-20261101-WIE-117-PHYSICAL-GOALS-01 | TASK: WIE-117 | AUTHOR: ChatGPT / GPT-6 -->
+  <script src="./modules/physical-goals.js?v=20261101-goals-1"></script>
+  <script src="./modules/results.js?v=20261101-goals-1"></script>
+  <!-- WIEDORA-CHANGE: WD-20261101-WIE-110-KB-FBW-01 | TASK: WIE-110 | AUTHOR: ChatGPT / GPT-6 -->
+  <script src="./modules/kettlebell-circuit-ui.js?v=20261101-kbc-ux2"></script>
+  <!-- WIEDORA-CHANGE: WD-20261101-WIE-115-CALISTHENICS-01 | TASK: WIE-115 | AUTHOR: ChatGPT / GPT-6 -->
+  <script src="./data/calisthenics-coach.js?v=20261101-fbw-swap-1"></script>
+  <script src="./modules/calisthenics-paths-ui.js?v=20261101-cali-1"></script>
+  <!-- WIEDORA-CHANGE: WD-20261101-FITPLAN-SYSTEMS-UX-01 | TASK: FitPlan systems UX | AUTHOR: ChatGPT / GPT-6 -->
+  <script src="./modules/training-guide.js?v=20261101-training-guide-2"></script>
+  <script src="./modules/workout-plan.js?v=20261101-training-guide-2"></script>
+  <!-- WIEDORA-CHANGE: WD-20261031-WIE-110-STARTER-PLANS-01 | TASK: WIE-110 | AUTHOR: ChatGPT / GPT-6 -->
+  <!-- WIEDORA-CHANGE: WD-20261031-WIE-185-SETS-ENGINE-07 | TASK: WIE-185 | AUTHOR: ChatGPT / GPT-6 -->
+  <script src="./modules/start.js?v=20261101-fbw-audit20-1"></script>
+  <script src="./modules/nutrient-guide.js?v=20261024-nutrient-fix-1"></script>
+  <script src="./modules/diet-tools.js?v=20261024-bugfix-1"></script>
+  <!-- WIEDORA-CHANGE: WD-20261101-WIE-161-FITPLAN-DIET-SEARCH-01 | TASK: WIE-161 | AUTHOR: ChatGPT / GPT-6 -->
+  <script src="./modules/diet.js?v=20261101-fitplan-food1"></script>
+  <script src="./modules/exercises.js?v=20261018-reports-1"></script>
+  <script src="./router.js?v=20261023-dashboard-1"></script>
+  <script src="../shared/i18n-core.js?v=20261004-i18n-1"></script>
+  <script src="./preferences.js?v=20261007-user-audit-resume"></script>
+  <!-- WIEDORA-CHANGE: WD-20261101-WIE-005-NATIVE-REGRESSION-11 | TASK: WIE-005 | AUTHOR: Codex / GPT-6 -->
+  <script src="./styles-loader.js?v=20261101-training-guide-2"></script>
+  <script src="./calendar-loader.js?v=20261018-season-3"></script>
+  <script src="../shared/account-sync.js?v=20261007-user-audit"></script>
+  <!-- WIEDORA-CHANGE: WD-20261029-WIE-155-GUEST-OFFLINE | TASK: WIE-155 | AUTHOR: ChatGPT / GPT-6 -->
+  <!-- WIEDORA-CHANGE: WD-20261029-WIE-155-SIGNOUT-CODEX1 | TASK: WIE-155 | AUTHOR: Codex / GPT-6 -->
+  <script src="../shared/guest-access.js?v=20261029-guest-free-2"></script>
+<script src="../shared/portal-nav.js?v=20261004-i18n-1"></script>
+  <script src="../shared/offline-control.js"></script>
+<script src="/js/ai-core.js?v=20261002-platform-2"></script>
+</body>
+</html>
+

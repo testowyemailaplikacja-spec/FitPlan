@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1410">
+  <meta name="keywords" content="plan treningowy, tabela ćwiczeń, atlas mięśni, aplikacja treningowa, mięśnie powierzchowne, mięśnie głębokie, kobieta, mężczyzna, ćwiczenia według partii">
+  <title>Planer treningowy</title>
+  <style>
+    :root{
+      --bg:#0b1410;
+      --bg-2:#0f1b15;
+      --bg-3:#13231a;
+      --panel:#0e1813;
+      --panel-2:#101d16;
+      --panel-soft:#15261d;
+      --card:#111d17;
+      --card-2:#0d1712;
+      --line:#1c3226;
+      --line-2:#284838;
+      --line-3:#335c47;
+      --text:#eef6f0;
+      --muted:#9fb4a8;
+      --primary:#30c56c;
+      --primary-2:#1ba854;
+      --primary-3:#52e58a;
+      --danger:#c84a4a;
+      --shadow:0 16px 40px rgba(0,0,0,.35);
+      --radius:22px;
+      --radius-2:18px;
+
+      --skin:#edd5c7;
+      --skin-stroke:#7b6257;
+      --muscle:#cb6a61;
+      --muscle-2:#b65952;
+      --muscle-stroke:#88433f;
+      --deep:#c39b6c;
+      --deep-2:#b28659;
+      --deep-stroke:#825c3d;
+      --active:#52e56b;
+      --active-stroke:#1f8645;
+      color-scheme:dark;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;min-height:100vh;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--text);line-height:1.5;
+      background:
+        radial-gradient(circle at top left, rgba(48,197,108,.12), transparent 26rem),
+        radial-gradient(circle at bottom right, rgba(82,229,138,.08), transparent 24rem),
+        linear-gradient(180deg, #0b1410, #0a120f 60%, #0b1410);
+    }
+    button,input,select,textarea{font:inherit}
+    button{touch-action:manipulation}
+    h1,h2,h3,h4,p{margin:0}
+    .shell{width:min(1320px,calc(100% - 24px));margin:0 auto;padding:20px 0 40px}
+    .page[hidden]{display:none!important}
+    .hero{
+      padding:34px;border:1px solid rgba(255,255,255,.08);border-radius:28px;
+      background:
+        linear-gradient(135deg,rgba(11,20,16,.98),rgba(17,32,24,.96)),
+        radial-gradient(circle at top right, rgba(48,197,108,.14), transparent 20rem);
+      box-shadow:var(--shadow);position:relative;overflow:hidden
+    }
+    .hero::after{
+      content:"◆";position:absolute;right:26px;top:4px;font-size:7rem;line-height:1;
+      color:rgba(255,255,255,.04)
+    }
+    .eyebrow{
+      display:inline-flex;align-items:center;padding:6px 13px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.05);
+      font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#cfe3d8
+    }
+    .hero h1{margin-top:16px;font-size:clamp(2rem,6vw,3.6rem);line-height:1.03}
+    .hero p{margin-top:10px;max-width:760px;color:#c6d7cc}
+    .workspace-head{display:flex;justify-content:space-between;align-items:end;gap:18px;margin:28px 0 16px}
+    .workspace-head h2{font-size:clamp(1.5rem,3vw,2rem)}
+    .muted{color:var(--muted)}
+    .counters{display:flex;gap:10px;flex-wrap:wrap}
+    .counter{
+      min-width:120px;padding:12px 14px;border-radius:16px;border:1px solid var(--line-2);
+      background:rgba(255,255,255,.03);box-shadow:var(--shadow);text-align:center;color:var(--muted)
+    }
+    .counter strong{display:block;color:#fff;font-size:1.2rem}
+    .section-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .section-card,.panel,.module-card,.info-card,.nav-pill,.mini-card{
+      border:1px solid var(--line);border-radius:var(--radius-2);background:var(--card);box-shadow:var(--shadow)
+    }
+    .section-card{
+      position:relative;padding:22px;cursor:pointer;text-align:left;overflow:hidden;
+      transition:transform .16s ease,border-color .16s ease
+    }
+    .section-card:hover,.section-card:focus-visible{transform:translateY(-2px);border-color:var(--line-3);outline:none}
+    .section-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--primary-3),var(--primary-2))}
+    .section-card[data-kind="results"]::before{background:linear-gradient(180deg,#64d0ff,#2a79aa)}
+    .section-card[data-kind="plan"]::before{background:linear-gradient(180deg,#ffd166,#c88400)}
+    .section-card[data-kind="diet"]::before{background:linear-gradient(180deg,#ff8fab,#b94768)}
+    .section-card[data-kind="exercise-table"]::before{background:linear-gradient(180deg,#7ff5a4,#20b65a)}
+    .section-card[data-kind="calendar"]::before{background:linear-gradient(180deg,#7ee35d,#2f7d3e)}
+    .home-icon{
+      width:52px;height:52px;display:grid;place-items:center;border-radius:16px;
+      background:linear-gradient(135deg, rgba(48,197,108,.18), rgba(82,229,138,.08));
+      border:1px solid rgba(48,197,108,.25);font-size:1.55rem;margin-bottom:14px
+    }
+    .badge,.mini-badge,.chip{
+      display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;font-size:.75rem;font-weight:800
+    }
+    .badge{background:rgba(48,197,108,.14);border:1px solid rgba(48,197,108,.24);color:#8ef3b2;text-transform:uppercase;letter-spacing:.06em}
+    .mini-badge{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#cadbd0}
+    .section-card h3{margin-top:12px;margin-bottom:6px;font-size:1.26rem}
+    .panel{padding:18px;margin-top:20px}
+    .progress-bar{height:12px;border-radius:999px;background:#24342d;overflow:hidden}
+    .progress-bar>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--primary-3));transition:width .2s ease}
+    .status-line{display:flex;justify-content:space-between;gap:12px;margin-top:10px;font-size:.92rem}
+    .action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .action-button,.tab-button,.toggle-button,.back-button,.rotate-button,.category-button,.muscle-card,.sidebar-button,.top-link{
+      border:1px solid var(--line-2);background:#132119;color:var(--text);cursor:pointer;border-radius:14px;
+      transition:transform .15s ease,border-color .15s ease,background .15s ease
+    }
+    .action-button:hover,.tab-button:hover,.toggle-button:hover,.back-button:hover,.rotate-button:hover,.category-button:hover,.muscle-card:hover,.sidebar-button:hover,.top-link:hover,
+    .action-button:focus-visible,.tab-button:focus-visible,.toggle-button:focus-visible,.back-button:focus-visible,.rotate-button:focus-visible,.category-button:focus-visible,.muscle-card:focus-visible,.sidebar-button:focus-visible,.top-link:focus-visible{
+      transform:translateY(-1px);border-color:var(--line-3);outline:none
+    }
+    .action-button{padding:10px 14px}
+    .action-button.primary{background:linear-gradient(135deg,var(--primary-2),var(--primary));border-color:var(--primary-2)}
+    .action-button.danger{border-color:#6a2a2a;color:#ffb2b2;background:#241414}
+    .toast{
+      position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(18px);opacity:0;pointer-events:none;
+      z-index:50;padding:12px 16px;border-radius:14px;background:#05120b;color:#fff;border:1px solid var(--line-2);box-shadow:var(--shadow);transition:.22s ease
+    }
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    footer{padding:22px 0 10px;text-align:center;color:#7d9488;font-size:.86rem}
+
+    .module-header{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+    .back-button{padding:10px 16px}
+    .module-card{padding:22px}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+    .tab-button,.toggle-button,.rotate-button,.category-button,.top-link{padding:10px 14px}
+    .tab-button.active,.toggle-button.active,.category-button.active,.sidebar-button.active,.muscle-card.active,.top-link.active{
+      background:linear-gradient(135deg,var(--primary-2),var(--primary));border-color:var(--primary);color:#fff
+    }
+    .tab-panel[hidden]{display:none!important}
+    .info-card{padding:18px;background:linear-gradient(180deg,#101d16,#0d1712)}
+</style>
+<!-- Embedded library licenses:
+The MIT License
+
+Copyright © 2010-2023 three.js authors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
+MIT License
+
+Copyright (c) 2023 Arjun Barrett
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+</head>
+<body data-fitplan-app="true">
+  <main class="shell">
+    <section class="page" id="homePage">
+      <header class="hero">
+        <span class="eyebrow">FitPlan</span>
+        <h1>Planer treningowy</h1>
+        <p>Narzędzie do układania planów treningowych, organizowania ćwiczeń, kontrolowania progresji i zarządzania najważniejszymi elementami procesu treningowego.</p>
+      </header>
+
+      <div class="workspace-head">
+        <div>
+          <h2>Panel główny</h2>
+          <p class="muted">Wybierz obszar, w którym chcesz pracować.</p>
+        </div>
+        <div class="counters" aria-label="Stan aplikacji">
+          <div class="counter"><strong id="sectionCount">0</strong>modułów</div>
+          <div class="counter"><strong id="entryCount">0</strong>mięśni</div>
+        </div>
+      </div>
+
+      <section class="section-grid" id="sectionGrid"></section>
+
+      <div class="panel fitplan-data-tools" hidden aria-hidden="true">
+        <summary>Zarządzanie danymi</summary>
+        <div class="action-row">
+          <button class="action-button" id="exportBtn" type="button">Eksportuj dane treningowe</button>
+          <button class="action-button" id="importBtn" type="button">Importuj dane treningowe</button>
+          <button class="action-button danger" id="resetBtn" type="button">Resetuj postęp modułów</button>
+          <input id="importFile" type="file" accept=".json,application/json" hidden>
+        </div>
+      </div>
+      <div hidden aria-hidden="true">
+        <span id="progressFill"></span><span id="progressText"></span><span id="progressPercent"></span>
+      </div>
+    </section>
+
+    <section class="page" id="modulePage" hidden>
+      <div class="module-header">
+        <button class="back-button" id="backBtn" type="button">← Wróć</button>
+        <div>
+          <h2 id="moduleTitle">Moduł</h2>
+          <p class="muted" id="moduleDescription"></p>
+        </div>
+      </div>
+
+      <article class="module-card">
+        <div class="tabs" id="moduleTabs">
+          <button class="tab-button active" data-tab="note" type="button">Opis</button>
+          <button class="tab-button" data-tab="questions" type="button">Elementy</button>
+          <button class="tab-button" data-tab="exam" type="button">Podsumowanie</button>
+        </div>
+        <section class="tab-panel" id="tab-note"></section>
+        <section class="tab-panel" id="tab-questions" hidden></section>
+        <section class="tab-panel" id="tab-exam" hidden></section>
+      </article>
+    </section>
+  </main>
+
+  <footer>FitPlan</footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+
+<script src="./data/muscles.js?v=20261005-stage12"></script>
+<script src="./data/exercise-catalog.js?v=20261020-bugpack-1"></script>
+<script src="./data/kettlebell-catalog.js?v=20261023-kettlebell-1"></script>
+<script src="./data/training-extensions.js?v=20261101-cali-1"></script>
+<script src="./data/exercise-registry.js?v=20261023-training-curricula-2"></script>
+<!-- WIEDORA-CHANGE: WD-20261031-WIE-110-STARTER-PLANS-01 | TASK: WIE-110 | AUTHOR: ChatGPT / GPT-6 -->
+<script src="./data/training-presets.js?v=20261101-fbw-ux-2"></script>
+<!-- WIEDORA-CHANGE: WD-20261031-WIE-117-TRAINING-HISTORY-03 | TASK: WIE-117 | AUTHOR: ChatGPT / GPT-6 -->
+<script src="./data/training-progress.js?v=20261101-fbw-audit20-1"></script>
+<!-- WIEDORA-CHANGE: WD-20261031-WIE-185-SETS-ENGINE-07 | TASK: WIE-185 | AUTHOR: ChatGPT / GPT-6 -->
+<!-- WIEDORA-CHANGE: WD-20261031-WIE-185-SETS-ENGINE-07 | TASK: WIE-185 | AUTHOR: ChatGPT / GPT-6 -->
+<script src="./data/training-sets.js?v=20261031-sets-1"></script>
+<!-- WIEDORA-CHANGE: WD-20261031-WIE-115-PLANNING-BASE-01 | TASK: WIE-115 | AUTHOR: ChatGPT / GPT-6 -->
+<script src="./data/training-planner.js?v=20261101-fbw-swap-1"></script>
+<!-- WIEDORA-CHANGE: WD-20261031-WIE-110-PUSHUP100-01 | TASK: WIE-110 | AUTHOR: ChatGPT / GPT-6 -->
+<script src="./data/training-load-engine.js?v=20261101-kbc-1"></script>
+<script src="./data/pushup-100.js?v=20261101-kbc-1"></script>
+<!-- WIEDORA-CHANGE: WD-20261101-WIE-110-KB-FBW-01 | TASK: WIE-110 | AUTHOR: ChatGPT / GPT-6 -->
+<script src="./data/kettlebell-fbw-circuit.js?v=20261101-fbw-swap-2"></script>
+<script src="./exercise-motion.js?v=20261020-motion-1"></script>
+<script src="./data/food-catalog.js?v=20261023-food-expanded-1"></script>
+<script src="./data/recipes.js?v=20261023-recipes-1"></script>
+<script src="./motion/library.js?v=20261023-side-step-2"></script>
+<script src="./motion/photographic-manifest.js"></script>
+<script src="./motion/photographic-catalog.js?v=20261023-side-step-2"></script>
+<script src="./motion/landmark-constraints.js?v=20261022-exercise-audit-1"></script>
+<script src="./motion/rig-renderer.js?v=20261022-exercise-audit-1"></script>
+<script src="./motion/full-body-poses.js?v=20261022-motion-reaudit-2"></script>
+<script src="./motion/exercises/catalog-rigs.js?v=20261022-motion-reaudit-3"></script>
+<script src="./motion/pose-constraints.js?v=20261022-motion-reaudit-2"></script>
+<script src="./motion/full-body-renderer.js?v=20261022-motion-reaudit-2"></script>
+<script src="./motion/renderer.js?v=20261023-side-step-2"></script>
+<script src="./exercise-motion-embed.js?v=20261022-motion-reaudit-3"></script>
+<script src="./exercise-details.js?v=20261023-training-curricula-2"></script>
+<script src="./data/app-data.js?v=20261023-dashboard-1"></script>
+<script src="./core/events.js?v=20261006-stage14"></script>
+<script src="./core/storage.js?v=20261007-user-audit"></script>
+<script src="./core/state.js?v=20261023-dashboard-1"></script>
+<script>
+const APP_DATA = window.FitPlanData?.modules || [];
+const CATEGORY_META = window.FitPlanData?.categoryMeta || {};
+
+const MUSCLES = window.FitPlanMuscles;
+
+const APP_STATE = window.FitPlanState;
+const homePage = document.getElementById("homePage");
+const modulePage = document.getElementById("modulePage");
+const sectionGrid = document.getElementById("sectionGrid");
+const sectionCount = document.getElementById("sectionCount");
+const entryCount = document.getElementById("entryCount");
+const progressFill = document.getElementById("progressFill");
+const progressText = document.getElementById("progressText");
+const progressPercent = document.getElementById("progressPercent");
+const moduleTitle = document.getElementById("moduleTitle");
+const moduleDescription = document.getElementById("moduleDescription");
+const toast = document.getElementById("toast");
+
+function escapeHtml(value=""){
+  return String(value).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
+}
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add("show");
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(()=>toast.classList.remove("show"), 2200);
+}
+function loadProgress(){
+  return APP_STATE.progress.read();
+}
+function saveProgress(state){
+  try{ APP_STATE.progress.write(state); return true; }
+  catch{ showToast("Nie udało się zapisać danych."); return false; }
+}
+function isCompleted(id){ return APP_STATE.progress.isCompleted(id); }
+function setCompleted(id, value){
+  try{ APP_STATE.progress.setCompleted(id, value); return true; }
+  catch{ showToast("Nie udało się zapisać danych."); return false; }
+}
+function renderHome(){
+  sectionCount.textContent = APP_DATA.length;
+  entryCount.textContent = MUSCLES.length;
+  sectionGrid.innerHTML = "";
+  APP_DATA.forEach(section=>{
+    const btn = document.createElement("button");
+    btn.className = "section-card";
+    btn.type = "button";
+    btn.dataset.kind = section.kind;
+    btn.innerHTML = `
+      <div class="home-icon">${escapeHtml(section.icon)}</div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span class="badge">${section.status === 'planned' ? 'W przygotowaniu' : 'Moduł'}</span>
+        ${isCompleted(section.id) ? `<span class="mini-badge">ukończony</span>` : ``}
+      </div>
+      <h3>${escapeHtml(section.title)}</h3>
+      <p class="muted">${escapeHtml(section.description)}</p>
+    `;
+    btn.addEventListener("click",()=>openSection(section.id));
+    sectionGrid.append(btn);
+  });
+  const done = APP_DATA.filter(s=>isCompleted(s.id)).length;
+  const total = APP_DATA.length;
+  const percent = total ? Math.round(done/total*100) : 0;
+  progressFill.style.width = percent + "%";
+  progressText.textContent = `${done} z ${total} modułów ukończonych`;
+  progressPercent.textContent = percent + "%";
+}
+function openSection(id){
+  const section = APP_DATA.find(s=>s.id===id);
+  if(!section) return false;
+  if(APP_STATE.snapshot().navigation.sectionId === 'kalendarz-treningowy' && window.FitPlanCalendarView?.canLeave() === false) return false;
+  document.body.classList.toggle("atlas-open", id === "tabela-cwiczen");
+  APP_STATE.setNavigation(id);
+  moduleTitle.textContent = section.title;
+  moduleDescription.textContent = section.description;
+  document.getElementById("moduleTabs").hidden = ["lista-cwiczen","plan-treningowy","dieta","start","podsumowanie-wynikow"].includes(id);
+  renderNote(section);
+  // Jednoekranowe moduły nie tworzą ukrytych paneli ani powiązanych ustawień.
+  if(["plan-treningowy","lista-cwiczen","dieta","start","podsumowanie-wynikow"].includes(id)) {
+    document.getElementById("tab-questions").replaceChildren();
+    document.getElementById("tab-exam").replaceChildren();
+  } else {
+    renderElements(section);
+    renderSummary(section);
+  }
+  switchTab("note");
+  homePage.hidden = true;
+  modulePage.hidden = false;
+  window.scrollTo({top:0,behavior:"smooth"});
+  return true;
+}
+function goHome(){
+  if(APP_STATE.snapshot().navigation.sectionId === 'kalendarz-treningowy' && window.FitPlanCalendarView?.canLeave() === false) return false;
+  document.body.classList.remove("atlas-open");
+  stopSpin();
+  modulePage.hidden = true;
+  homePage.hidden = false;
+  APP_STATE.setNavigation(null);
+  renderHome();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function switchTab(tab){
+  const id = APP_STATE.snapshot().navigation.sectionId;
+  if(!id || (["lista-cwiczen","plan-treningowy","dieta","start","podsumowanie-wynikow"].includes(id) && tab !== "note") || !APP_STATE.setNavigation(id, tab)) return false;
+  document.querySelectorAll(".tab-button").forEach(btn=>btn.classList.toggle("active", btn.dataset.tab===tab));
+  document.querySelectorAll(".tab-panel").forEach(panel=>panel.hidden = panel.id !== "tab-"+tab);
+  return true;
+}
+document.getElementById("moduleTabs").addEventListener("click", e=>{
+  const btn = e.target.closest("[data-tab]");
+  if(btn) switchTab(btn.dataset.tab);
+});
+document.getElementById("backBtn").addEventListener("click", goHome);
+
+function renderNote(section){
+  const host = document.getElementById("tab-note");
+  if(section.id === "tabela-cwiczen"){
+    host.innerHTML = '<div id="atlasRoot"></div>';
+    return;
+  }
+  if(["plan-treningowy","lista-cwiczen","start","podsumowanie-wynikow","kalendarz-treningowy"].includes(section.id)){
+    // Single-screen tools: no course tabs or manually marking a module completed.
+    host.innerHTML = section.note;
+    return;
+  }
+  host.innerHTML = `${section.note}
+    <div class="action-row">
+      <button class="action-button primary" id="completeSectionBtn" type="button">${isCompleted(section.id) ? "Oznacz moduł jako nieukończony" : "Oznacz moduł jako ukończony"}</button>
+    </div>`;
+  document.getElementById("completeSectionBtn").addEventListener("click",()=>{
+    if(setCompleted(section.id, !isCompleted(section.id))) openSection(section.id);
+  });
+}
+function renderElements(section){
+  document.getElementById("tab-questions").innerHTML = section.elementsHtml;
+}
+function renderSummary(section){
+  document.getElementById("tab-exam").innerHTML = section.summaryHtml;
+}
+
+function stopSpin(){ /* Native 3D atlas owns rotation lifecycle. */ }
+
+document.getElementById("resetBtn").addEventListener("click",()=>{
+  if(!confirm("Czy zresetować oznaczenia ukończenia modułów? Notatki kalendarza zostaną zachowane.")) return;
+  try{ APP_STATE.progress.reset(); }
+  catch{ showToast("Nie udało się zapisać danych."); return; }
+  renderHome();
+  showToast("Postęp modułów został zresetowany.");
+});
+document.getElementById("exportBtn").addEventListener("click",()=>{
+  let data;
+  try{data = APP_STATE.backup.export();}
+  catch{showToast("Nie udało się odczytać danych do kopii. Zapisane dane nie zostały zmienione."); return;}
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "dane_planera_treningowego.json";
+  a.click();
+  URL.revokeObjectURL(url);
+});
+document.getElementById("importBtn").addEventListener("click",()=>document.getElementById("importFile").click());
+document.getElementById("importFile").addEventListener("change", async e=>{
+  const file = e.target.files?.[0];
+  if(!file) return;
+  try{
+    const data = APP_STATE.backup.validate(JSON.parse(await file.text()));
+    if(!confirm("Wczytać kopię danych? Zastąpi zapisany postęp oraz notatki kalendarza, jeśli plik je zawiera.")) return;
+    try{APP_STATE.backup.import(data);}
+    catch{showToast("Nie udało się zapisać danych."); return;}
+    renderHome();
+    showToast("Dane treningowe zostały zaimportowane.");
+  }catch{
+    alert("Nie udało się odczytać pliku danych.");
+  }finally{
+    e.target.value = "";
+  }
+});
+
+window.FitPlanEvents.on(window,"stateChange",event=>{
+  if(event.detail?.slice!=="progress" && event.detail?.slice!=="all") return;
+  renderHome();
+  const id=APP_STATE.snapshot().navigation.sectionId,button=document.getElementById("completeSectionBtn");
+  if(id && button) button.textContent=isCompleted(id)?"Oznacz moduł jako nieukończony":"Oznacz moduł jako ukończony";
+});
+renderHome();
+</script>
+</body>
+</html>
+

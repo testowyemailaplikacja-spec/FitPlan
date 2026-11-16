@@ -1,0 +1,19 @@
+{
+  "id": "/apps/fitplan/",
+  "name": "FitPlan — planer treningowy",
+  "short_name": "FitPlan",
+  "start_url": "/apps/fitplan/",
+  "scope": "/apps/fitplan/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#c24167",
+  "description": "Tryb offline dla FitPlan — planer treningowy.",
+  "icons": [
+    {
+      "src": "/apps/fitplan/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
