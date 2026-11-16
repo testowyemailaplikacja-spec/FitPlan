@@ -1,0 +1,277 @@
+{
+  "change_id": "WD-20261030-WIE-155-FITPLAN-UPDATE-01",
+  "source_commit": "e50078e144dde42dbc393f10f38fd05f521d0f62",
+  "actor": "Codex / GPT-6 (full version unknown)",
+  "node": {
+    "red": {
+      "pass": 8,
+      "fail": 2
+    },
+    "green": {
+      "pass": 21,
+      "fail": 0,
+      "skip": 0
+    },
+    "runtime_red": {
+      "pass": 10,
+      "fail": 2
+    }
+  },
+  "browser": {
+    "red": {
+      "scope": "local HTTP; real service worker/cache and app; synthetic old generation marker; guest; no external backend",
+      "scenarios": [
+        {
+          "name": "complete old package",
+          "result": "PASS"
+        },
+        {
+          "name": "HTTP 503 retains prior package",
+          "result": "PASS",
+          "message": {
+            "type": "REFRESH_DONE",
+            "appId": "fitplan",
+            "done": 113,
+            "total": 113,
+            "failed": 1
+          }
+        },
+        {
+          "name": "reopen prior shell and iframe offline after failed upgrade; saved plan retained",
+          "result": "PASS"
+        }
+      ],
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: HTTP 200 HTML fallback must not complete a JavaScript download\n    at /workspace/scratch/438df6b76859/current-app/tests/fitplan-offline-update.browser.cjs:91:9",
+      "faultHits": [
+        {
+          "release": "current",
+          "fault": "http"
+        },
+        {
+          "release": "current",
+          "fault": "html"
+        },
+        {
+          "release": "current",
+          "fault": "html"
+        }
+      ]
+    },
+    "green": {
+      "scope": "local HTTP; real service worker/cache and app; synthetic old generation marker; guest; no external backend",
+      "scenarios": [
+        {
+          "name": "complete old package",
+          "result": "PASS"
+        },
+        {
+          "name": "runtime HTML response serves the saved valid script",
+          "result": "PASS"
+        },
+        {
+          "name": "HTTP 503 retains prior package",
+          "result": "PASS",
+          "message": {
+            "type": "REFRESH_DONE",
+            "appId": "fitplan",
+            "done": 113,
+            "total": 113,
+            "failed": 1
+          }
+        },
+        {
+          "name": "reopen prior shell and iframe offline after failed upgrade; saved plan retained",
+          "result": "PASS"
+        },
+        {
+          "name": "HTTP 200 HTML fallback rejects upgrade",
+          "result": "PASS",
+          "message": {
+            "type": "REFRESH_DONE",
+            "appId": "fitplan",
+            "done": 113,
+            "total": 113,
+            "failed": 1
+          }
+        },
+        {
+          "name": "successful retry retires prior package only after completion",
+          "result": "PASS",
+          "message": {
+            "type": "REFRESH_DONE",
+            "appId": "fitplan",
+            "done": 113,
+            "total": 113,
+            "failed": 0
+          }
+        },
+        {
+          "name": "reopen new shell and iframe offline; saved plan retained",
+          "result": "PASS"
+        },
+        {
+          "name": "first invalid download stays retryable and is never marked ready",
+          "result": "PASS"
+        }
+      ],
+      "status": "PASS",
+      "faultHits": [
+        {
+          "release": "old",
+          "fault": "html"
+        },
+        {
+          "release": "current",
+          "fault": "http"
+        },
+        {
+          "release": "current",
+          "fault": "html"
+        },
+        {
+          "release": "current",
+          "fault": "html"
+        },
+        {
+          "release": "current",
+          "fault": "html"
+        },
+        {
+          "release": "current",
+          "fault": "html"
+        }
+      ]
+    },
+    "runtime_red": {
+      "scope": "local HTTP; real service worker/cache and app; synthetic old generation marker; guest; no external backend",
+      "scenarios": [
+        {
+          "name": "complete old package",
+          "result": "PASS"
+        }
+      ],
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: runtime HTML response must preserve the previously downloaded script\n+ actual - expected\n\n+ '447c858e409ae6f2096d3b28df618db8d84711421ce2288646bd78b25aa873bf'\n- '120a0fdaa3039f85efc7e4f63c2efab80b9d691cc41719cfb6c141b517349c61'\n\n    at /workspace/scratch/438df6b76859/current-app/tests/fitplan-offline-update.browser.cjs:81:9",
+      "faultHits": [
+        {
+          "release": "old",
+          "fault": "html"
+        }
+      ]
+    }
+  },
+  "log_sha256": {
+    "fitplan-update-red.log": "11145db32f2ab4f5b7596efc891068f3ddc7cf6e4bfe84a8455dbba40a56b5d7",
+    "fitplan-update-green.log": "646d1736c957bcf11d6170f18457b0a1fba45ed924c5824c32a0dc67b08c8767",
+    "fitplan-update-browser-red.log": "c2a72f5b832a457af2f0bb75200b1fa33b4f8305ce2ce3f0d8167de4fb587cda",
+    "fitplan-update-browser-green.log": "e68c49202117d1362a827f83331a6ecd7658a3762e8a819906fc6ad6f0f127ad",
+    "fitplan-update-runtime-red.log": "b02f7214841af6e3853923d30ce4093bcfc809aa32aaf9d2a4b43c214b95d880",
+    "fitplan-update-runtime-browser-red.log": "81ecc3adc142c2141febbe18d96934908256b72c950a56c5df81fff4d97e4ddb",
+    "fitplan-update-final-green.log": "c30a229819e1a6a42ac9df3fbc6135a2ba97722c7c4a3290d2a126fe1dd4ecc3",
+    "fitplan-update-browser-final.log": "008001407f77cdf30ee0ba609e79dce025d3e6a311cab4d1cb543154c698c321"
+  },
+  "source_files_sha256": {
+    "apps/fitplan/sw.js": "ba05ea179159fc78b78fc68b7851a761d5ac89166a373ec6f166ff38b835f44a",
+    "tests/fitplan-service-worker.test.cjs": "883814766835aa53f1c8e4f411bf23fb97d6860d1de1aafb18abe782d087e669",
+    "tests/fitplan-offline-update.browser.cjs": "3b7678d81b365613a2de99555e5ee7b63bed7a4951f64dbe4e030f36b5da6c05",
+    "package.json": "2ae1e08eaa78cddacef8057f8f0bd2e0fd8101a2ec4cd5de192b9958257f4758",
+    "tests/law-citations.browser.cjs": "0c07294043133b6695d1fe15594de83ed4f1878f6a6e5074a039ad9c3d45c33d"
+  },
+  "review": {
+    "reviewer": "Codex / GPT-6 (full version unknown), separate read-only subagent",
+    "initial": "Scoped guard approved; identified existing runtime cache path and missing regression integration",
+    "resolution": "Both observations tested and addressed; incremental review ready with no Critical/Important/Minor issues",
+    "limitations": "No live deploy, full regression completion, backend or physical-device verdict"
+  },
+  "full_attempts": [
+    {
+      "result": "FAIL",
+      "node": {
+        "pass": 851,
+        "fail": 0,
+        "skip": 0
+      },
+      "fitplan_browser_scenarios": 8,
+      "error": "LAW visual regression 390/definiowanie-prawa-administracyjnego",
+      "log_sha256": "e17ed119de2544bbdfaf4951a34070d6ddb00e75dcfe7265ef84788a271bdb25"
+    }
+  ],
+  "law_visual_diagnostic": {
+    "same_image_size": [
+      318,
+      3547
+    ],
+    "different_pixels": 43,
+    "bbox": [
+      65,
+      1,
+      287,
+      46
+    ],
+    "max_channel_difference": 1,
+    "cause": "external sticky tab bar included in note crop; not note content",
+    "negative_mutation": {
+      "expected_result": "FAIL",
+      "actual_result": "FAIL",
+      "mutation": "1px padding-left on baseline note, outside-repo preload",
+      "log_sha256": "cfd0e94fca8fb5af875834379114fac7a5fd84de173cc059d6a38a27bc12b605"
+    },
+    "images_sha256": {
+      "mismatch-390-definiowanie-prawa-administracyjnego-after.png": "b9da5c4a593d9a7da07f39ca74b04429deeb4f586de44560f549ef78a20bf119",
+      "mismatch-390-definiowanie-prawa-administracyjnego-before.png": "53b059cbb720c984bc0aed9649b05452a871d48a41517dd14e69148cd07efc05"
+    },
+    "isolated_after_fix": {
+      "result": "PASS",
+      "flows": 33,
+      "visualComparisons": 6,
+      "popupTargets": 6,
+      "log_sha256": "46f2951c27ca83660126773897459ceaa21ee992e5f9eb7b94577178d31c0ac3"
+    }
+  },
+  "full_final": {
+    "result": "PASS",
+    "exit_code": 0,
+    "node": {
+      "pass": 851,
+      "fail": 0,
+      "skip": 0
+    },
+    "fitplan_browser_scenarios": 8,
+    "law_flows": 33,
+    "law_visual_comparisons": 6,
+    "prototype_combinations": 54,
+    "preloads": "none",
+    "log_sha256": "2e96dbf43d8f7369c709315725bdb8028e5d1345a8249c9ba86ff397e7596dd0",
+    "tail": [
+      "PASS close/reopen state and account-scoped storage",
+      "PASS JSON export",
+      "PASS reset cancellation",
+      "PASS reset, JSON import, physical ports",
+      "PASS reload restores account topology",
+      "PASS tablet/mobile widths and controls",
+      "PASS mobile canvas panning",
+      "PASS device dragging without opening a dialog",
+      "PASS keyboard removes a cable and restores focus",
+      "PASS logout closes lab and another account starts separately",
+      "PASS guest sees learning material but locked lab cannot write account progress",
+      "{",
+      "  \"htmlFiles\": 28,",
+      "  \"refsChecked\": 335,",
+      "  \"issues\": 0",
+      "}",
+      "{",
+      "  \"poiTotal\": 120871,",
+      "  \"poiTiles\": 61,",
+      "  \"worshipTotal\": 93711,",
+      "  \"events\": 5,",
+      "  \"stories\": 14",
+      "}",
+      "Law startup verified: 33 courses, 33 course views.",
+      "PASS: 54 variant/device/theme prototype combinations, keyboard activation and negative approval gate",
+      "NOT_RUN: real device and installed PWA tests; NOT_DEPLOYED: this is an isolated mockup",
+      "",
+      "Verification PASS (full regression included)."
+    ]
+  }
+}

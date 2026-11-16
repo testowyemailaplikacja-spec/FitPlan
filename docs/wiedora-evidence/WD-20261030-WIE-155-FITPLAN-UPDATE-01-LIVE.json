@@ -1,0 +1,50 @@
+{
+  "checked_at": "2026-10-30T14:12:36.086932+00:00",
+  "expected_commit": "358067601c228478047ab9e57dc88793f1a4f3ba",
+  "results": [
+    {
+      "url": "https://develop--constant-app.netlify.app/build-info.json",
+      "status": 200,
+      "x_robots_tag": "noindex, nofollow",
+      "sha256": "d8f9be4689ac2bbf64f51a29a1de2ff58a45fcb05a3bc53dec4690ba697f7440",
+      "build_info": {
+        "commit": "358067601c228478047ab9e57dc88793f1a4f3ba",
+        "builtAt": "2026-10-30T14:12:01.289Z",
+        "auditFingerprint": "ba52bb4ffdbd176d3bb0e5e5445513c51adf0216519b25bf2965bc780a7686c6"
+      }
+    },
+    {
+      "url": "https://develop--constant-app.netlify.app/apps/fitplan/sw.js",
+      "status": 200,
+      "x_robots_tag": "noindex, nofollow",
+      "sha256": "ba05ea179159fc78b78fc68b7851a761d5ac89166a373ec6f166ff38b835f44a",
+      "matches_tested_source": true
+    },
+    {
+      "url": "https://constant-app.netlify.app/build-info.json",
+      "status": 200,
+      "x_robots_tag": null,
+      "sha256": "df0a09c8313e8e361b1acd50eec272a1d574669581df7257f51d3fda6db3be3f",
+      "build_info": {
+        "commit": "316a2441bb592b0cdfb4791834121d8f7c4a1b05",
+        "builtAt": "2026-10-29T16:47:13.412Z",
+        "auditFingerprint": "07d3244b8c1fc76475fba41a920c5f743172682c5ba06431daf64bc7c1ece9a8"
+      }
+    }
+  ],
+  "browser": {
+    "browser": "Chrome / CUA",
+    "url": "https://develop--constant-app.netlify.app/apps/fitplan/",
+    "scenario": "open FitPlan home, click offline download, observe progress and completion",
+    "result": "PASS",
+    "observed_progress": "Pobieranie 84%",
+    "completed_label": "Offline gotowe",
+    "completion_button_enabled": true,
+    "screenshot_sha256": "4ffebff6bc890eb176c4c9f04df8456e92e6068621cd48bccc34f61c5ee1c642",
+    "limitations": [
+      "No browser network disconnection or installed PWA in this live smoke",
+      "Fault injection, offline reopening and upgrade retention verified locally with real SW; no live fault injection",
+      "No authenticated account or physical device verification"
+    ]
+  }
+}
