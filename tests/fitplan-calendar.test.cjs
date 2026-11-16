@@ -1,0 +1,16 @@
+const assert=require("node:assert/strict"),fs=require("node:fs"),vm=require("node:vm");
+const source=fs.readFileSync("apps/fitplan/calendar-enhancement.js","utf8");
+const sandbox={window:{},console};vm.createContext(sandbox);vm.runInContext(source,sandbox);
+const M=sandbox.window.FitPlanCalendarModel;assert.ok(M,"exports calendar model");
+assert.equal(M.daysInMonth(2026,1),28);assert.equal(M.daysInMonth(2028,1),29);
+const entries={};M.save(entries,"2026-10-04",{note:"Nogi",time:"18:30"});
+assert.deepEqual(JSON.parse(JSON.stringify(entries["2026-10-04"])),{note:"Nogi",time:"18:30"});
+assert.equal(M.move(entries,"2026-10-04","2026-10-06"),true);assert.equal(entries["2026-10-04"],undefined);
+assert.deepEqual(JSON.parse(JSON.stringify(entries["2026-10-06"])),{note:"Nogi",time:"18:30"});
+M.save(entries,"2026-10-07",{note:"Cardio",time:"19:00"});
+assert.equal(M.move(entries,"2026-10-06","2026-10-07"),false,"does not overwrite an occupied day");
+assert.deepEqual(JSON.parse(JSON.stringify(entries["2026-10-06"])),{note:"Nogi",time:"18:30"});
+assert.equal(M.remove(entries,"2026-10-06"),true,"removes an existing entry");
+assert.equal(entries["2026-10-06"],undefined);
+assert.equal(M.remove(entries,"2026-10-06"),false,"removing a missing entry is harmless");
+console.log("fitplan calendar model: PASS");
